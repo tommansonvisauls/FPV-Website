@@ -3,184 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexusStream</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>NeonGrid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
-      --glass: rgba(255, 255, 255, 0.05);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      --neon-pink: #ff00ff;
+      --neon-blue: #00f3ff;
+      --bg-dark: #0a0a12;
     }
 
     body {
-      background: #0f172a;
-      color: white;
-      min-height: 100vh;
-    }
-
-    .header {
-      backdrop-filter: blur(12px);
-      background: var(--glass);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.5rem;
-      background-image: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .upload-btn {
-      background: var(--gradient);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .upload-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
-
-    .video-card {
-      background: var(--glass);
-      border-radius: 16px;
+      margin: 0;
+      background: var(--bg-dark);
+      font-family: 'Orbitron', sans-serif;
+      height: 100vh;
       overflow: hidden;
-      transition: transform 0.2s;
     }
 
-    .video-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .thumbnail {
-      height: 200px;
-      background: #1e293b;
+    .game-container {
       position: relative;
+      width: 100vw;
+      height: 100vh;
     }
 
-    .video-info {
-      padding: 1rem;
-    }
-
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .hud {
+      position: absolute;
+      top: 20px;
       width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      place-items: center;
+      display: flex;
+      justify-content: space-around;
+      color: var(--neon-blue);
+      text-shadow: 0 0 10px var(--neon-blue);
+      font-size: 1.5em;
+      z-index: 2;
     }
 
-    .upload-box {
-      background: var(--glass);
-      padding: 2rem;
-      border-radius: 16px;
-      width: 90%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    .drop-zone {
-      border: 2px dashed rgba(255,255,255,0.3);
-      border-radius: 8px;
-      padding: 2rem;
-      margin: 1rem 0;
+    .target {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, 
+        var(--neon-pink) 20%, 
+        transparent 70%);
+      border-radius: 50%;
       cursor: pointer;
+      transition: transform 0.1s;
+      animation: pulse 1.5s infinite;
     }
 
-    .drop-zone:hover {
-      border-color: #ec4899;
+    .target:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+      0% { filter: drop-shadow(0 0 5px var(--neon-pink)); }
+      50% { filter: drop-shadow(0 0 20px var(--neon-pink)); }
+      100% { filter: drop-shadow(0 0 5px var(--neon-pink)); }
+    }
+
+    .start-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 15px 30px;
+      font-family: 'Orbitron';
+      font-size: 1.5em;
+      background: var(--neon-blue);
+      border: none;
+      border-radius: 8px;
+      color: var(--bg-dark);
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 3;
+    }
+
+    .start-btn:hover {
+      box-shadow: 0 0 20px var(--neon-blue);
+    }
+
+    .game-over {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--neon-pink);
+      z-index: 4;
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">NexusStream</div>
-    <button class="upload-btn" onclick="openUpload()">Upload Video</button>
-  </header>
-
-  <main class="video-grid">
-    <!-- Video cards would be dynamically generated -->
-    <div class="video-card">
-      <div class="thumbnail"></div>
-      <div class="video-info">
-        <h3>Sample Video</h3>
-        <p>2.4k views • 3 days ago</p>
-      </div>
+  <div class="game-container">
+    <div class="hud">
+      <div>Score: <span id="score">0</span></div>
+      <div>Time: <span id="timer">30</span>s</div>
     </div>
-  </main>
-
-  <div class="modal" id="uploadModal">
-    <div class="upload-box">
-      <h2>Upload Content</h2>
-      <div class="drop-zone" 
-           ondragover="handleDragOver(event)" 
-           ondrop="handleDrop(event)"
-           onclick="document.getElementById('fileInput').click()">
-        Drag files here or click to upload
-      </div>
-      <input type="file" id="fileInput" hidden accept="video/*">
-      <p id="fileName"></p>
-      <button class="upload-btn" style="margin-top: 1rem;">Start Upload</button>
+    <button class="start-btn" onclick="startGame()">START</button>
+    <div class="game-over">
+      <h2>GAME OVER</h2>
+      <p>Final Score: <span id="final-score">0</span></p>
+      <button class="start-btn" onclick="startGame()">PLAY AGAIN</button>
     </div>
   </div>
 
   <script>
-    function openUpload() {
-      document.getElementById('uploadModal').style.display = 'grid';
-    }
+    let score = 0;
+    let timeLeft = 30;
+    let gameActive = false;
+    let timerId;
 
-    function handleDragOver(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.dataTransfer.dropEffect = 'copy';
-    }
-
-    function handleDrop(e) {
-      e.preventDefault();
-      const files = e.dataTransfer.files;
-      if(files.length > 0) {
-        handleFiles(files);
+    function createTarget() {
+      const target = document.createElement('div');
+      target.className = 'target';
+      target.style.left = `${Math.random() * (window.innerWidth - 60)}px`;
+      target.style.top = `${Math.random() * (window.innerHeight - 60)}px`;
+      target.onclick = () => {
+        if(gameActive) {
+          score += 100;
+          document.getElementById('score').textContent = score;
+          target.remove();
+          createTarget();
+        }
       }
+      document.body.appendChild(target);
     }
 
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-      handleFiles(e.target.files);
-    });
-
-    function handleFiles(files) {
-      document.getElementById('fileName').textContent = `Selected: ${files[0].name}`;
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-      if (event.target == document.getElementById('uploadModal')) {
-        event.target.style.display = 'none';
-      }
+    function startGame() {
+      // Reset game state
+      score = 0;
+      timeLeft = 30;
+      gameActive = true;
+      document.querySelector('.game-over').style.display = 'none';
+      document.querySelector('.start-btn').style.display = 'none';
+      document.getElementById('score').textContent = '0';
+      document.getElementById('timer').textContent = '30';
+      
+      // Clear existing targets
+      document.querySelectorAll('.target').forEach(t => t.remove());
+      
+      // Create initial targets
+      for(let i = 0; i < 3; i++) createTarget();
+      
+      // Start timer
+      timerId = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+        
+        if(timeLeft <= 0) {
+          gameActive = false;
+          clearInterval(timerId);
+          document.querySelector('.game-over').style.display = 'block';
+          document.getElementById('final-score').textContent = score;
+        }
+      }, 1000);
     }
   </script>
 </body>
