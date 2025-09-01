@@ -3,149 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reliable Chat v2.1</title>
+  <title>NexusStream</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Previous CSS remains unchanged */
-    :root { /* ... */ }
-    body { /* ... */ }
-    .chat-container { /* ... */ }
-    .messages { /* ... */ }
-    .message { /* ... */ }
-    .message.self { /* ... */ }
-    .input-area { /* ... */ }
-    input[type="text"] { /* ... */ }
-    button { /* ... */ }
-    .user-id { /* ... */ }
+    :root {
+      --gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .header {
+      backdrop-filter: blur(12px);
+      background: var(--glass);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      background-image: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .upload-btn {
+      background: var(--gradient);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .upload-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .video-card {
+      background: var(--glass);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .thumbnail {
+      height: 200px;
+      background: #1e293b;
+      position: relative;
+    }
+
+    .video-info {
+      padding: 1rem;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      place-items: center;
+    }
+
+    .upload-box {
+      background: var(--glass);
+      padding: 2rem;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .drop-zone {
+      border: 2px dashed rgba(255,255,255,0.3);
+      border-radius: 8px;
+      padding: 2rem;
+      margin: 1rem 0;
+      cursor: pointer;
+    }
+
+    .drop-zone:hover {
+      border-color: #ec4899;
+    }
   </style>
 </head>
 <body>
-  <div class="user-id" id="userId">Your ID: <span id="userIdValue">...</span></div>
-  <div class="chat-container">
-    <div class="messages" id="messages"></div>
-    <div class="input-area">
-      <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
-      <button onclick="sendMessage()">Send</button>
+  <header class="header">
+    <div class="logo">NexusStream</div>
+    <button class="upload-btn" onclick="openUpload()">Upload Video</button>
+  </header>
+
+  <main class="video-grid">
+    <!-- Video cards would be dynamically generated -->
+    <div class="video-card">
+      <div class="thumbnail"></div>
+      <div class="video-info">
+        <h3>Sample Video</h3>
+        <p>2.4k views • 3 days ago</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="uploadModal">
+    <div class="upload-box">
+      <h2>Upload Content</h2>
+      <div class="drop-zone" 
+           ondragover="handleDragOver(event)" 
+           ondrop="handleDrop(event)"
+           onclick="document.getElementById('fileInput').click()">
+        Drag files here or click to upload
+      </div>
+      <input type="file" id="fileInput" hidden accept="video/*">
+      <p id="fileName"></p>
+      <button class="upload-btn" style="margin-top: 1rem;">Start Upload</button>
     </div>
   </div>
 
-  <script src="/socket.io/socket.io.js"></script>
   <script>
-    // Persistent user ID
-    const userId = localStorage.getItem('chatUserId') || `user-${Math.random().toString(36).substring(2, 15)}`;
-    localStorage.setItem('chatUserId', userId);
-    document.getElementById('userIdValue').textContent = userId;
-
-    // Connection manager (Nuclear Fix implementation)
-    const connection = {
-      socket: null,
-      messageQueue: [],
-      isOnline: false,
-
-      init() {
-        this.socket = io('http://localhost:3000', {
-          transports: ['websocket'],
-          upgrade: false,
-          reconnectionAttempts: 5
-        });
-
-        this.socket.on('connect', () => {
-          this.isOnline = true;
-          document.getElementById('userId').style.color = '#2ecc71';
-          this.flushQueue();
-        });
-
-        this.socket.on('disconnect', () => {
-          this.isOnline = false;
-          document.getElementById('userId').style.color = '#e74c3c';
-        });
-
-        this.socket.on('newMessage', this.handleIncoming);
-      },
-
-      send(payload) {
-        if(this.isOnline) {
-          this.socket.emit('sendMessage', payload, (ack) => {
-            if(ack?.status !== 'received') {
-              this.messageQueue.push(payload);
-            }
-          });
-        } else {
-          this.messageQueue.push(payload);
-        }
-      },
-
-      flushQueue() {
-        while(this.messageQueue.length > 0) {
-          this.send(this.messageQueue.shift());
-        }
-      },
-
-      handleIncoming(msg) {
-        const messagesContainer = document.getElementById('messages');
-        messagesContainer.appendChild(createMessageElement(msg));
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-    };
-
-    // Message element creator
-    function createMessageElement(msg) {
-      const div = document.createElement('div');
-      div.className = `message ${msg.senderId === userId ? 'self' : ''}`;
-      div.innerHTML = `
-        <div style="font-weight: bold; margin-bottom: 5px;">
-          ${msg.senderId} ${msg.senderId === userId ? '(You)' : ''}
-        </div>
-        <div>${msg.content}</div>
-        <div style="font-size: 0.8em; margin-top: 5px; opacity: 0.7;">
-          ${new Date(msg.timestamp).toLocaleTimeString()}
-        </div>
-      `;
-      return div;
+    function openUpload() {
+      document.getElementById('uploadModal').style.display = 'grid';
     }
 
-    // Enhanced send function
-    function sendMessage() {
-      try {
-        const input = document.getElementById('messageInput');
-        const btn = document.querySelector('button');
-        const message = input.value.trim();
-        
-        if (!message) return;
-        
-        btn.disabled = true;
-        btn.textContent = 'Sending...';
-        input.disabled = true;
-        
-        connection.send({
-          senderId: userId,
-          content: message,
-          timestamp: new Date().toISOString()
-        });
-        
-        input.value = '';
-      } catch(error) {
-        console.error('Send error:', error);
-        alert('Message failed: ' + error.message);
-      } finally {
-        setTimeout(() => {
-          document.querySelector('button').disabled = false;
-          document.querySelector('button').textContent = 'Send';
-          input.disabled = false;
-        }, 1000);
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'copy';
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      const files = e.dataTransfer.files;
+      if(files.length > 0) {
+        handleFiles(files);
       }
     }
 
-    // Initialization
-    document.addEventListener('DOMContentLoaded', () => {
-      connection.init();
-      
-      document.getElementById('messageInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          sendMessage();
-        }
-      });
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      handleFiles(e.target.files);
     });
+
+    function handleFiles(files) {
+      document.getElementById('fileName').textContent = `Selected: ${files[0].name}`;
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('uploadModal')) {
+        event.target.style.display = 'none';
+      }
+    }
   </script>
 </body>
 </html>
