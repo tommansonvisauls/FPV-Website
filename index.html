@@ -1,164 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeonGrid</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <title>Dirtbike Game</title>
   <style>
-    :root {
-      --neon-pink: #ff00ff;
-      --neon-blue: #00f3ff;
-      --bg-dark: #0a0a12;
-    }
-
     body {
       margin: 0;
-      background: var(--bg-dark);
-      font-family: 'Orbitron', sans-serif;
-      height: 100vh;
       overflow: hidden;
-    }
-
-    .game-container {
-      position: relative;
-      width: 100vw;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
+      font-family: Arial, sans-serif;
     }
-
-    .hud {
+    #gameCanvas {
+      border: 3px solid #555;
+      background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+    #score {
       position: absolute;
       top: 20px;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      color: var(--neon-blue);
-      text-shadow: 0 0 10px var(--neon-blue);
-      font-size: 1.5em;
-      z-index: 2;
+      left: 20px;
+      color: white;
+      font-size: 24px;
     }
-
-    .target {
+    #controls {
       position: absolute;
-      width: 60px;
-      height: 60px;
-      background: radial-gradient(circle, 
-        var(--neon-pink) 20%, 
-        transparent 70%);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: transform 0.1s;
-      animation: pulse 1.5s infinite;
-    }
-
-    .target:hover {
-      transform: scale(1.1);
-    }
-
-    @keyframes pulse {
-      0% { filter: drop-shadow(0 0 5px var(--neon-pink)); }
-      50% { filter: drop-shadow(0 0 20px var(--neon-pink)); }
-      100% { filter: drop-shadow(0 0 5px var(--neon-pink)); }
-    }
-
-    .start-btn {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 15px 30px;
-      font-family: 'Orbitron';
-      font-size: 1.5em;
-      background: var(--neon-blue);
-      border: none;
-      border-radius: 8px;
-      color: var(--bg-dark);
-      cursor: pointer;
-      transition: all 0.3s;
-      z-index: 3;
-    }
-
-    .start-btn:hover {
-      box-shadow: 0 0 20px var(--neon-blue);
-    }
-
-    .game-over {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      bottom: 20px;
+      color: white;
       text-align: center;
-      color: var(--neon-pink);
-      z-index: 4;
     }
   </style>
 </head>
 <body>
-  <div class="game-container">
-    <div class="hud">
-      <div>Score: <span id="score">0</span></div>
-      <div>Time: <span id="timer">30</span>s</div>
-    </div>
-    <button class="start-btn" onclick="startGame()">START</button>
-    <div class="game-over">
-      <h2>GAME OVER</h2>
-      <p>Final Score: <span id="final-score">0</span></p>
-      <button class="start-btn" onclick="startGame()">PLAY AGAIN</button>
-    </div>
+  <div id="score">Score: 0</div>
+  <canvas id="gameCanvas" width="800" height="500"></canvas>
+  <div id="controls">
+    <p>← → Arrow Keys to Move | Space to Flip</p>
   </div>
 
   <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreElement = document.getElementById('score');
+
+    // Game variables
     let score = 0;
-    let timeLeft = 30;
-    let gameActive = false;
-    let timerId;
+    let gameSpeed = 3;
+    let isJumping = false;
+    let flipAngle = 0;
 
-    function createTarget() {
-      const target = document.createElement('div');
-      target.className = 'target';
-      target.style.left = `${Math.random() * (window.innerWidth - 60)}px`;
-      target.style.top = `${Math.random() * (window.innerHeight - 60)}px`;
-      target.onclick = () => {
-        if(gameActive) {
-          score += 100;
-          document.getElementById('score').textContent = score;
-          target.remove();
-          createTarget();
+    // Bike properties
+    const bike = {
+      x: 100,
+      y: 300,
+      width: 60,
+      height: 30,
+      speed: 0,
+      maxSpeed: 8,
+      gravity: 0.4,
+      jumpForce: 10,
+      color: '#FF4500'
+    };
+
+    // Track segments
+    const track = [];
+    for (let i = 0; i < 20; i++) {
+      track.push({
+        x: i * 100,
+        y: 350 + Math.sin(i * 0.5) * 50,
+        width: 100,
+        height: 30
+      });
+    }
+
+    // Game loop
+    function gameLoop() {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Update game state
+    function update() {
+      // Move track (illusion of bike moving)
+      track.forEach(segment => {
+        segment.x -= gameSpeed;
+        if (segment.x < -100) {
+          segment.x = track[track.length - 1].x + 100;
+          segment.y = 350 + Math.random() * 100 - 50;
         }
+      });
+
+      // Apply gravity
+      bike.y += bike.gravity;
+      bike.speed *= 0.98; // Friction
+
+      // Check landing
+      let onGround = false;
+      track.forEach(segment => {
+        if (
+          bike.x + bike.width > segment.x &&
+          bike.x < segment.x + segment.width &&
+          bike.y + bike.height > segment.y &&
+          bike.y < segment.y + segment.height
+        ) {
+          bike.y = segment.y - bike.height;
+          onGround = true;
+          isJumping = false;
+          flipAngle = 0;
+        }
+      });
+
+      // Jumping/flipping physics
+      if (isJumping) {
+        flipAngle += 0.1;
+        if (flipAngle > Math.PI * 2) flipAngle = 0;
       }
-      document.body.appendChild(target);
+
+      // Score
+      score += gameSpeed;
+      scoreElement.textContent = `Score: ${Math.floor(score / 10)}`;
     }
 
-    function startGame() {
-      // Reset game state
-      score = 0;
-      timeLeft = 30;
-      gameActive = true;
-      document.querySelector('.game-over').style.display = 'none';
-      document.querySelector('.start-btn').style.display = 'none';
-      document.getElementById('score').textContent = '0';
-      document.getElementById('timer').textContent = '30';
+    // Draw everything
+    function draw() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw track
+      ctx.fillStyle = '#8B4513';
+      track.forEach(segment => {
+        ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
+      });
+
+      // Draw bike (with rotation if flipping)
+      ctx.save();
+      ctx.translate(bike.x + bike.width / 2, bike.y + bike.height / 2);
+      ctx.rotate(flipAngle);
+      ctx.fillStyle = bike.color;
+      ctx.fillRect(-bike.width / 2, -bike.height / 2, bike.width, bike.height);
       
-      // Clear existing targets
-      document.querySelectorAll('.target').forEach(t => t.remove());
-      
-      // Create initial targets
-      for(let i = 0; i < 3; i++) createTarget();
-      
-      // Start timer
-      timerId = setInterval(() => {
-        timeLeft--;
-        document.getElementById('timer').textContent = timeLeft;
-        
-        if(timeLeft <= 0) {
-          gameActive = false;
-          clearInterval(timerId);
-          document.querySelector('.game-over').style.display = 'block';
-          document.getElementById('final-score').textContent = score;
-        }
-      }, 1000);
+      // Wheels
+      ctx.fillStyle = '#000';
+      ctx.fillRect(-bike.width / 2 - 5, -bike.height / 2 - 5, 10, 10);
+      ctx.fillRect(bike.width / 2 - 5, -bike.height / 2 - 5, 10, 10);
+      ctx.restore();
     }
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') bike.speed = -5;
+      if (e.key === 'ArrowRight') bike.speed = 5;
+      if (e.key === ' ' && !isJumping) {
+        bike.y -= bike.jumpForce;
+        isJumping = true;
+      }
+    });
+
+    // Start game
+    gameLoop();
   </script>
 </body>
 </html>
