@@ -23,7 +23,6 @@
   <meta property="og:description" content="FPV drones & ground videography. Christchurch, New Zealand." />
   <meta property="og:type" content="website" />
   
- 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet" />
@@ -91,20 +90,17 @@
       text-transform:uppercase; font-size:.95rem;
     }
     .brand-mark{
-  width:34px;      /* was 34px — gives TMV room */
-  height:34px;
-  border-radius:10px;
-  background:#fff;
-  display:grid;
-  place-items:center;
-  color:#000;
-  font-weight:800;
-  font-size:.7rem;  /* was .9rem — smaller text */
-  letter-spacing:0.5px; /* tightens TMV nicely */
-  box-shadow: inset 0 0 0 1px #000, 0 8px 20px rgba(0,0,0,.35);
-}
-
-
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:#fff;
+      display:grid;
+      place-items:center;
+      color:#000;
+      font-weight:800;
+      font-size:.7rem;
+      letter-spacing:0.5px;
+      box-shadow: inset 0 0 0 1px #000, 0 8px 20px rgba(0,0,0,.35);
     }
     .nav-links{display:flex; align-items:center; gap:18px}
     .nav a.link{
@@ -335,10 +331,12 @@
   ========================== -->
   <header class="nav" id="top">
     <div class="nav-inner">
-      <div class="brand">
+      <!-- Brand now links to homepage -->
+      <a href="https://visualsbytom.co.nz" class="brand" aria-label="Tom Manson Visuals home">
         <div class="brand-mark">TMV</div>
         <span>Tom Manson Visuals</span>
-      </div>
+      </a>
+
       <nav class="nav-links">
         <a class="link" href="/about.html">About</a>
         <a class="link" href="#services">Services</a>
@@ -380,11 +378,9 @@
     </div>
   </section>
 
-  
-
   <!-- =========================
      SERVICES
-========================= -->
+  ========================== -->
 <section id="services" aria-label="Services" class="fade">
   <div class="section-head">
     <h2>Services</h2>
@@ -417,7 +413,7 @@
 
   <!-- =========================
      PORTFOLIO
-========================= -->
+  ========================== -->
 <section id="portfolio" aria-label="Portfolio" class="fade">
   <div class="section-head">
     <h2>Portfolio</h2>
