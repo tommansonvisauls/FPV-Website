@@ -10,7 +10,16 @@ function toggleScrolled() {
 toggleScrolled();
 window.addEventListener('scroll', toggleScrolled, { passive: true });
 
-
+// Fade on scroll
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if (e.isIntersecting){
+      e.target.classList.add('show');
+      observer.unobserve(e.target);
+    }
+  });
+}, {threshold: .18});
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 
 // Keyboard video fallback
 document.querySelectorAll('.tile video').forEach(v=>{
