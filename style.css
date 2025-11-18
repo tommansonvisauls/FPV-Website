@@ -376,16 +376,7 @@ footer{
 
 .tiny{opacity:.7}
 
-/* ---------------------------
-   ANIMATIONS
-----------------------------*/
-.fade{opacity:0; transform:translateY(16px); transition:opacity .7s, transform .7s}
-.show{opacity:1; transform:none}
 
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(16px)}
-  to{opacity:1; transform:none}
-}
 
 /* ---------------------------
    RESPONSIVE
