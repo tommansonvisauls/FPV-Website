@@ -310,7 +310,6 @@
     z-index:2;
   }
 
-  .tile.playing{ }
   .meta{
     position:absolute;
     left:14px;
@@ -368,22 +367,48 @@
   .tile.is-placeholder:hover{transform:none;}
   .tile.is-placeholder .yt-preview{display:none;}
 
-  /* ---------- GoPro badge (box style) ---------- */
-  .tile .badge{
+  /* ---------- NEW: GoPro banner BAR across full width ---------- */
+  .tile .badge-bar{
     position:absolute;
-    top:12px;
-    left:12px;
+    top:0;
+    left:0;
+    right:0;
     z-index:4;
-    padding:10px 12px;
-    border-radius:12px;             /* boxy */
+
+    /* thickness (about ~2x your old pill) */
+    padding:16px 18px;
+
     font-weight:800;
-    font-size:.85rem;
+    font-size:.95rem;
     letter-spacing:.2px;
-    background:rgba(0,0,0,.55);     /* cinematic */
     color:#fff;
-    border:1px solid rgba(255,255,255,.22);
-    backdrop-filter:blur(8px);
-    box-shadow:0 14px 30px rgba(0,0,0,.45);
+
+    /* cinematic glass bar */
+    background:linear-gradient(
+      180deg,
+      rgba(0,0,0,.58),
+      rgba(0,0,0,.32)
+    );
+    border-bottom:1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+
+    cursor:pointer;
+    user-select:none;
+
+    transition: background .2s ease, border-color .2s ease, opacity .2s ease;
+  }
+  .tile .badge-bar:hover{
+    background:linear-gradient(
+      180deg,
+      rgba(0,0,0,.68),
+      rgba(0,0,0,.40)
+    );
+    border-bottom-color:rgba(255,255,255,.22);
   }
 
   /* ---------- Contact ---------- */
@@ -529,10 +554,11 @@
             </button>
           </div>
 
+          <!-- Top rated is DEFAULT now -->
           <select id="sortSelect" class="sort-select" aria-label="Sort videos">
+            <option value="rating_desc">Top rated</option>
             <option value="date_desc">Date (new → old)</option>
             <option value="date_asc">Date (old → new)</option>
-            <option value="rating_desc">Top rated</option>
           </select>
         </div>
 
@@ -546,7 +572,6 @@
     <!-- LANDSCAPE GRID -->
     <div id="portfolio-landscape" class="portfolio landscape" role="list">
 
-      <!-- TILE 1 -->
       <a class="tile"
          data-date="01/01/25" data-rating="3"
          href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener">
@@ -564,7 +589,6 @@
         </div>
       </a>
 
-      <!-- TILE 2 -->
       <a class="tile"
          data-date="10/02/25" data-rating="5"
          href="https://www.youtube.com/watch?v=uX3yayS8MT4" target="_blank" rel="noopener">
@@ -582,7 +606,6 @@
         </div>
       </a>
 
-      <!-- TILE 3 -->
       <a class="tile"
          data-date="05/03/25" data-rating="4"
          href="https://www.youtube.com/watch?v=r2Jm6vQGXYY" target="_blank" rel="noopener">
@@ -600,7 +623,6 @@
         </div>
       </a>
 
-      <!-- hidden slots still work -->
       <a class="tile is-hidden"
          data-date="01/01/24" data-rating="1"
          href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank" rel="noopener">
@@ -657,10 +679,18 @@
         </div>
       </a>
 
+      <!-- VERTICAL TILE 3 with clickable TOP BAR -->
       <a class="tile"
          data-date="15/12/25" data-rating="5"
          href="https://www.youtube.com/shorts/_Yz7iD8_ELU?si=AtcV6VSdQ68ro-JL" target="_blank" rel="noopener">
-        <div class="badge">As seen on GoPro ANZ</div>
+
+        <div class="badge-bar"
+             role="link"
+             tabindex="0"
+             data-badge-url="https://www.instagram.com/reel/DQ734bUj54g/?igsh=MWRtZ3gzZHNoNzZ5Nw==">
+          As seen on GoPro ANZ
+        </div>
+
         <img class="poster" src="assets/image_6.jpg" alt="Vertical project poster">
         <div class="yt-preview"
           data-yt="https://www.youtube.com/embed/_Yz7iD8_ELU?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
@@ -704,8 +734,9 @@
       <div class="card">
         <h3>Enquiry Form</h3>
 
-        <!-- Replace this URL with your Google Form *embed* URL -->
-        <!-- In Google Forms: Send -> <> Embed HTML -> copy the src URL -->
+        <!-- IMPORTANT:
+             Use the *EMBED* URL (from Google Forms: Send -> <> -> copy the iframe src).
+             The short forms.gle link often won't embed properly. -->
         <div class="gform-wrap">
           <iframe
             class="gform-iframe"
@@ -736,9 +767,8 @@
   const toggleScrolled = () => {
     if(window.scrollY > 6) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
-    
   };
-  toggleScrolled(); 
+  toggleScrolled();
   window.addEventListener('scroll', toggleScrolled, {passive:true});
 
   // fade-in observer for sections
@@ -753,7 +783,6 @@
   document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
   // ---------- EASY DEFAULT YEAR TOGGLE ----------
-  // Change this to 2026 later when you want it to default to newest year.
   const DEFAULT_YEAR = 2025; // <- set to 2026 when ready
 
   // ---------- Tabs ----------
@@ -789,8 +818,6 @@
         grids[id].hidden = (id !== targetId);
       });
 
-      // re-apply year + sort for the newly shown grid
-      activeYear = String(DEFAULT_YEAR);
       buildYearButtons();
       applySortAndFilter();
     });
@@ -838,8 +865,6 @@
   // ---------- Sorting + fixed year buttons + date rendering ----------
   const sortSelect = document.getElementById('sortSelect');
   const yearFiltersEl = document.getElementById('yearFilters');
-
-  // only these two years:
   const YEARS = [2025, 2026];
 
   let activeYear = String(DEFAULT_YEAR);
@@ -865,7 +890,7 @@
 
     let rating = parseInt(tile.dataset.rating || "0", 10);
     if(Number.isNaN(rating)) rating = 0;
-    rating = Math.max(0, Math.min(5, rating)); // clamp 0..5
+    rating = Math.max(0, Math.min(5, rating));
 
     return { dateStr, dateObj, year, rating };
   }
@@ -885,7 +910,6 @@
 
   function buildYearButtons(){
     yearFiltersEl.innerHTML = "";
-
     YEARS.forEach(y => {
       const btn = document.createElement('button');
       btn.className = 'year-btn' + (String(y) === String(activeYear) ? ' active' : '');
@@ -906,7 +930,6 @@
     const grid = getActiveGrid();
     const tiles = getVisibleTilesForGrid(grid);
 
-    // Filter year (display none so it reflows with no gaps)
     tiles.forEach(t => {
       const meta = getTileMeta(t);
       const okYear = meta.year && String(meta.year) === String(activeYear);
@@ -921,19 +944,17 @@
       const B = getTileMeta(b);
 
       if(mode === "rating_desc"){
-        if(A.rating !== B.rating) return B.rating - A.rating; // 5 → 1
-        // tie-break by newest date
+        if(A.rating !== B.rating) return B.rating - A.rating;
         const ta = A.dateObj ? A.dateObj.getTime() : -Infinity;
         const tb = B.dateObj ? B.dateObj.getTime() : -Infinity;
         return tb - ta;
       }
 
-      // date asc/desc
       const ta = A.dateObj ? A.dateObj.getTime() : -Infinity;
       const tb = B.dateObj ? B.dateObj.getTime() : -Infinity;
 
       if(mode === "date_asc") return ta - tb;
-      return tb - ta; // date_desc default
+      return tb - ta;
     };
 
     inPlay.sort(cmp);
@@ -944,9 +965,28 @@
 
   sortSelect.addEventListener('change', applySortAndFilter);
 
+  // ---------- Badge bar click (stops tile link + opens Instagram) ----------
+  document.querySelectorAll('.badge-bar[data-badge-url]').forEach(badge => {
+    const url = badge.getAttribute('data-badge-url');
+
+    function openBadge(e){
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(url, '_blank', 'noopener');
+    }
+
+    badge.addEventListener('click', openBadge);
+    badge.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') openBadge(e);
+    });
+  });
+
   // Init
   renderDates();
   buildYearButtons();
+
+  // DEFAULT SORT = Top rated
+  sortSelect.value = "rating_desc";
   applySortAndFilter();
 
 </script>
