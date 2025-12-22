@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tom Manson Visuals FPV Drone Portfolio</title>
+<meta name="description" content="FPV Drone portfolio." />
+<meta name="theme-color" content="#000000" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+
+  /* ---------- Root Variables ---------- */
+  :root {
+    --bg:#0b0b0b; --bg-alt:#111; --text:#fff; --muted:#bdbdbd;
+    --line:#222; --card:#141414; --card-2:#171717; --accent:#fff;
+    --shadow:0 10px 30px rgba(0,0,0,.45); --radius:16px; --radius-sm:12px;
+    --glass:rgba(0,0,0,.28);
+  }
+
+  /* ---------- Reset / Base ---------- */
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    scroll-behavior:smooth;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:var(--text);}
+  img,video{max-width:100%;display:block;border-radius:var(--radius);}
+
+  /* ---------- Navigation ---------- */
+  .nav{
+    position:fixed;
+    inset-inline:0;
+    top:0;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:74px;
+    pointer-events:none;
+  }
+  .nav-inner{
+    pointer-events:auto;
+    width:min(1200px,94vw);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:999px;
+    background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.35));
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:var(--shadow);
+    transform:translateY(4px);
+    transition:all .3s ease;
+  }
+  .nav.scrolled .nav-inner{
+    background:rgba(12,12,12,.65);
+    border-color:rgba(255,255,255,.08);
+    transform:translateY(0);
+    box-shadow:0 12px 40px rgba(0,0,0,.55);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-weight:800;
+    text-transform:uppercase;
+    font-size:.95rem;
+    cursor:pointer;
+  }
+  .brand-mark{
+    width:34px;
+    height:34px;
+    background:#fff;
+    color:#000;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    font-weight:800;
+    font-size:.7rem;
+    letter-spacing:.5px;
+    box-shadow: inset 0 0 0 1px #000,0 8px 20px rgba(0,0,0,.35);
+    transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .brand:hover .brand-mark{
+    transform:translateY(-3px);
+    box-shadow: inset 0 0 0 1px #000,0 14px 30px rgba(0,0,0,.45);
+  }
+  .nav-links{display:flex;align-items:center;gap:18px}
+  .nav a.link{
+    padding:8px 12px;
+    border-radius:10px;
+    color:#eaeaea;
+    font-weight:600;
+    opacity:.9;
+    transition:opacity .2s ease,background .2s ease,transform .2s ease;
+  }
+  .nav a.link:hover{opacity:1;background:rgba(255,255,255,.06)}
+  .cta{
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06);
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:700;
+    letter-spacing:.3px;
+    transition:transform .15s ease,background .2s ease,border-color .2s ease;
+  }
+  .cta:hover{
+    transform:translateY(-1px);
+    background:rgba(255,255,255,.12);
+    border-color:rgba(255,255,255,.28);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    height:80vh;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    padding-top:74px;
+    width:100vw;
+    margin-left:50%;
+    transform:translateX(-50%);
+  }
+
+  .hero-img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:.95;
+  }
+
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25));
+    z-index:1;
+  }
+  .hero-content{
+    position:absolute;
+    text-align:center;
+    max-width:900px;
+    color:#fff;
+    z-index:2;
+    animation:fadeUp .9s ease both .15s;
+    padding:0 20px;
+  }
+  h1.big{
+    font-size:clamp(2.5rem,5vw,4.5rem);
+    font-weight:800;
+    text-shadow:0 10px 30px rgba(0,0,0,.45);
+    margin:0;
+  }
+  .sub{
+    font-size:clamp(1rem,2vw,1.25rem);
+    opacity:.9;
+    margin-top:12px;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{
+    width:min(1200px,94vw);
+    margin-inline:auto;
+    padding:88px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-head{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:28px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,3.5vw,2.4rem);
+    margin:0;
+  }
+  .lead{
+    color:var(--muted);
+    max-width:820px;
+    font-size:1.05rem;
+  }
+
+  /* ---------- NEW: Portfolio tabs ---------- */
+  .portfolio-tabs{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .tab-btn{
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease, opacity .2s ease;
+    opacity:.9;
+  }
+  .tab-btn:hover{transform:translateY(-1px);opacity:1;}
+  .tab-btn.active{
+    background:rgba(255,255,255,.14);
+    border-color:rgba(255,255,255,.28);
+    opacity:1;
+  }
+
+  /* ---------- Portfolio grid & tiles ---------- */
+  .portfolio{
+    display:grid;
+    grid-template-columns:repeat(3,1fr); /* 3 per row on desktop */
+    gap:18px;
+  }
+  .portfolio[hidden]{display:none !important;}
+
+  .portfolio .tile{
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    background:#0f0f0f;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:var(--shadow);
+    aspect-ratio:16/9; /* default landscape */
+    cursor:pointer;
+    display:block;
+    color:#fff;
+  }
+
+  /* Vertical grid uses portrait aspect ratio */
+  .portfolio.vertical .tile{
+    aspect-ratio:9/16;
+  }
+
+  .tile .poster{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .tile .yt-preview,
+  .tile .yt-preview iframe {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    z-index:2;
+  }
+
+  .tile video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:contrast(102%) saturate(102%);
+    transition:transform .35s ease,filter .35s ease,opacity .25s ease;
+    opacity:0;
+    z-index:2;
+  }
+  .tile.playing video{
+    opacity:1;
+    transform:scale(1.02);
+  }
+  .meta{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    right:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    backdrop-filter:blur(6px);
+    background:linear-gradient(to top,rgba(0,0,0,.45),rgba(0,0,0,.2));
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.08);
+    z-index:3;
+  }
+  .title{font-weight:700;}
+  .hint{font-size:.9rem;color:#d7d7d7;}
+  .play{
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    background:rgba(255,255,255,.92);
+    color:#000;
+    display:grid;
+    place-items:center;
+    font-weight:800;
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+  }
+
+  .portfolio .tile:focus,
+  .portfolio .tile:hover{
+    transform:translateY(-4px);
+    transition:transform .18s ease;
+  }
+  .portfolio .tile:focus{
+    outline:3px solid rgba(255,255,255,.04);
+  }
+
+  /* ---------- NEW: Hide/placeholder helpers ---------- */
+  .tile.is-hidden{display:none !important;} /* removes from layout -> no gaps */
+  .tile.is-placeholder{
+    opacity:.45;
+    cursor:not-allowed;
+  }
+  .tile.is-placeholder .play{display:none;}
+  .tile.is-placeholder .hint{opacity:.9;}
+  .tile.is-placeholder:hover{transform:none;}
+  .tile.is-placeholder .yt-preview{display:none;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:24px;
+  }
+  .contact-list{display:grid;gap:10px;margin-top:6px;}
+  .contact-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#121212;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:12px;
+    padding:14px 16px;
+  }
+  .contact-item a{color:#fff;opacity:.95;}
+  .card{
+    background:linear-gradient(180deg,var(--card),var(--card-2));
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:var(--shadow);
+  }
+  form{display:grid;gap:12px;}
+  input,textarea{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.12);
+    background:#101010;
+    color:#fff;
+    outline:none;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  input::placeholder,textarea::placeholder{color:#9b9b9b;}
+  input:focus,textarea:focus{
+    border-color:#fff;
+    background:#0e0e0e;
+  }
+  textarea{min-height:130px;resize:vertical;}
+  .submit{
+    background:#fff;
+    color:#000;
+    border:0;
+    padding:14px 18px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+    transition:transform .15s ease,opacity .2s ease;
+  }
+  .submit:hover{transform:translateY(-1px);}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:32px 0;
+    text-align:center;
+    color:#c9c9c9;
+    background:linear-gradient(to bottom,#0b0b0b,#080808);
+  }
+  .foot-inner{
+    width:min(1200px,94vw);
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .tiny{opacity:.7;font-size:.9rem;}
+
+  /* ---------- Animations ---------- */
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .fade{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .7s ease,transform .7s ease;
+  }
+  .fade.show{opacity:1;transform:none;}
+
+  /* ---------- Responsiveness ---------- */
+  @media(max-width:1024px){
+    .portfolio{grid-template-columns:repeat(2,1fr);} /* 2 per row */
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:640px){
+    .nav-links{display:none}
+    .portfolio{grid-template-columns:1fr;} /* 1 per row */
+    .hero{
+      height:56vh;
+      padding-top:68px;
+    }
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:74px;
+    background:linear-gradient(
+      to bottom,
+      rgba(0,0,0,.85),
+      rgba(0,0,0,0)
+    );
+    z-index:50;
+    pointer-events:none;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="nav" role="banner">
+    <div class="nav-inner" role="navigation" aria-label="Main navigation">
+      <a href="https://visualsbytom.co.nz" class="brand" aria-label="Tom Manson Visuals home">
+        <div class="brand-mark" aria-hidden="true">TMV</div>
+        <span>Tom Manson Visuals</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Site links">
+        <a class="link" href="about.html">About</a>
+        <a class="link" href="#services">Services</a>
+        <a class="link" href="#portfolio">Portfolio</a>
+        <a class="link cta" href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <img class="hero-img" src="assets/IMG_01.JPG" alt="hero image" >
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content" role="region" aria-label="Hero content">
+      <h1 class="big">Tom Manson Visuals FPV Drone Portfolio</h1>
+      <p class="sub">Collection of my FPV Drone work</p>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="fade" aria-labelledby="portfolio-heading">
+    <div class="section-head">
+      <h2 id="portfolio-heading">Portfolio</h2>
+      <p class="lead">Hover a tile to preview. Click to open the full video on Vimeo.</p>
+
+      <!-- NEW: buttons -->
+      <div class="portfolio-tabs" role="tablist" aria-label="Portfolio format toggle">
+        <button class="tab-btn active" type="button" data-target="portfolio-landscape" role="tab" aria-selected="true">
+          Landscape
+        </button>
+        <button class="tab-btn" type="button" data-target="portfolio-vertical" role="tab" aria-selected="false">
+          Vertical
+        </button>
+      </div>
+    </div>
+
+    <!-- LANDSCAPE GRID (your existing one) -->
+    <div id="portfolio-landscape" class="portfolio landscape" role="list">
+      <!-- TILE 1 -->
+      <a class="tile" href="https://www.youtube.com/watch?v=VIDEO_ID_1" target="_blank" rel="noopener">
+        <img class="poster" src="assets/IMG_4.jpg" alt="Project 1 poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/VIDEO_ID_1?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">Project 1</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+
+      <!-- TILE 2 -->
+      <a class="tile" href="https://www.youtube.com/watch?v=uX3yayS8MT4" target="_blank" rel="noopener">
+        <img class="poster" src="assets/IMG_2.jpg" alt="Project 2 poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/uX3yayS8MT4?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">Electric Motocross at the A&P Show</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+
+      <!-- TILE 3 -->
+      <a class="tile" href="https://www.youtube.com/watch?v=r2Jm6vQGXYY" target="_blank" rel="noopener">
+        <img class="poster" src="assets/IMG_3364.jpeg" alt="Project 3 poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/r2Jm6vQGXYY?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">EMX Track Social Racing</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+
+      <!-- TILE 4 (example hidden) -->
+      <a class="tile is-hidden" href="https://www.youtube.com/watch?v=VIDEO_ID_4" target="_blank" rel="noopener">
+        <img class="poster" src="assets/poster4.jpg" alt="Project 4 poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/VIDEO_ID_4?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">Project 4</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+
+      <!-- TILE 5 -->
+      <a class="tile is-hidden" href="https://www.youtube.com/watch?v=VIDEO_ID_5" target="_blank" rel="noopener">
+        <img class="poster" src="assets/poster5.jpg" alt="Project 5 poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/VIDEO_ID_5?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">Project 5</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+
+      <!-- TILE 6 -->
+      <a class="tile is-hidden" href="https://www.youtube.com/watch?v=VIDEO_ID_6" target="_blank" rel="noopener">
+        <img class="poster" src="assets/poster6.jpg" alt="Project 6 poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/VIDEO_ID_6?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">Project 6</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- VERTICAL GRID (new) -->
+    <div id="portfolio-vertical" class="portfolio vertical" role="list" hidden>
+      <!-- Add your vertical tiles here (9:16). Same structure. -->
+      <!-- Example placeholder tile (visible but grey). Remove or change later. -->
+      <a class="tile is-placeholder" href="#" onclick="return false;" aria-disabled="true">
+        <img class="poster" src="assets/IMG_4.jpg" alt="Vertical placeholder poster">
+        <div class="meta">
+          <div>
+            <div class="title">Vertical slot</div>
+            <div class="hint">Add a vertical video here</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Example hidden slot (doesn't take space) -->
+      <a class="tile is-hidden" href="https://www.youtube.com/shorts/SHORT_ID_HERE" target="_blank" rel="noopener">
+        <img class="poster" src="assets/verticalposter1.jpg" alt="Vertical project poster">
+        <div class="yt-preview"
+          data-yt="https://www.youtube.com/embed/SHORT_ID_HERE?autoplay=1&mute=1&controls=0&rel=0&playsinline=1">
+        </div>
+        <div class="meta">
+          <div>
+            <div class="title">Vertical Project</div>
+            <div class="hint">Click here to watch on YouTube</div>
+          </div>
+          <div class="play">▶</div>
+        </div>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade" aria-labelledby="contact-heading">
+    <div class="section-head">
+      <h2 id="contact-heading">Contact</h2>
+      <p class="lead">Get in touch to collaborate or request a service.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="card">
+        <h3>Direct Contact</h3>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div style="width:10px;height:10px;border-radius:3px;background:#fff"></div>
+            <a href="mailto:email@example.com">email@example.com</a>
+          </div>
+          <div class="contact-item">
+            <div style="width:10px;height:10px;border-radius:3px;background:#fff"></div>
+            <a href="tel:+1234567890">+1 234 567 890</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Enquiry Form</h3>
+        <form onsubmit="event.preventDefault(); alert('Thanks! We’ll get back to you shortly.')">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="text" name="subject" placeholder="Subject">
+          <textarea name="message" placeholder="Message..." required></textarea>
+          <button type="submit" class="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-inner">
+      <div class="tiny">© <span id="year"></span> Tom Manson Visuals</div>
+      <div class="tiny">Web Template &nbsp;|&nbsp; Demo</div>
+    </div>
+  </footer>
+
+<script>
+  // set current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // nav scrolled style
+  const header = document.querySelector('.nav');
+  const toggleScrolled = () => {
+    if(window.scrollY > 6) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  toggleScrolled();
+  window.addEventListener('scroll', toggleScrolled, {passive:true});
+
+  // fade-in observer for sections
+  const observer = new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+        observer.unobserve(e.target);
+      }
+    }
+  }, {threshold: 0.18});
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+  // NEW: tab switching
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const grids = {
+    "portfolio-landscape": document.getElementById('portfolio-landscape'),
+    "portfolio-vertical": document.getElementById('portfolio-vertical')
+  };
+
+  function stopAllPreviews() {
+    document.querySelectorAll('.yt-preview').forEach(p => p.innerHTML = "");
+    document.querySelectorAll('.tile.playing').forEach(t => t.classList.remove('playing'));
+  }
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+
+      // UI state
+      tabButtons.forEach(b => {
+        const isActive = b === btn;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      // Stop any running previews and swap grids
+      stopAllPreviews();
+      Object.keys(grids).forEach(id => {
+        grids[id].hidden = (id !== targetId);
+      });
+    });
+  });
+
+  // YouTube hover preview logic (works for BOTH grids)
+  function wireHoverPreviews(scopeEl) {
+    const tiles = scopeEl.querySelectorAll('.tile');
+
+    tiles.forEach(tile => {
+      // Skip hidden/placeholder tiles
+      if (tile.classList.contains('is-hidden') || tile.classList.contains('is-placeholder')) return;
+
+      const preview = tile.querySelector('.yt-preview');
+      if (!preview) return;
+
+      const src = preview.dataset.yt;
+      if (!src) return;
+
+      function play() {
+        // Only play if the tile is visible (current grid)
+        const grid = tile.closest('.portfolio');
+        if (!grid || grid.hidden) return;
+
+        if (preview.querySelector('iframe')) return;
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.allow = "autoplay; encrypted-media";
+        iframe.allowFullscreen = true;
+        preview.appendChild(iframe);
+        tile.classList.add('playing');
+      }
+
+      function stop() {
+        preview.innerHTML = "";
+        tile.classList.remove('playing');
+      }
+
+      tile.addEventListener('mouseenter', play);
+      tile.addEventListener('mouseleave', stop);
+      tile.addEventListener('focus', play);
+      tile.addEventListener('blur', stop);
+    });
+  }
+
+  wireHoverPreviews(document.getElementById('portfolio-landscape'));
+  wireHoverPreviews(document.getElementById('portfolio-vertical'));
+
+</script>
+
+</body>
+</html>
