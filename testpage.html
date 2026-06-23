@@ -1,18 +1,108 @@
-<!-- 3. Horizontal Smooth Continuous Hoop Bento Grid Layout -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="31c4ca4f-3261-49e6-9ea8-27fb78f12a82"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tom Manson Visuals — FPV Drones | Videography</title>
+    <meta name="description" content="Tom Manson Visuals — FPV drones & videography. Based in Christchurch, New Zealand. Showreels, action sports, events, and creative projects." />
+    <meta name="theme-color" content="#000000" />
+
+    <meta property="og:title" content="Tom Manson Visuals — FPV Drones | Videography" />
+    <meta property="og:description" content="FPV drones & Videography. Christchurch, New Zealand." />
+    <meta property="og:type" content="website" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&family=Syncopate:wght=700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+        }
+        .logo-font {
+            font-family: 'Syncopate', sans-serif;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        /* Hide scrollbars but keep horizontal swipe behavior active */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen overflow-x-hidden antialiased selection:bg-white/10">
+
+    <header class="nav fixed inset-x-0 top-0 z-50 flex items-center justify-center h-20 px-4 md:px-8 pointer-events-none">
+        <div id="nav-inner" class="pointer-events-auto w-full max-w-6xl bg-[#111827]/40 backdrop-blur-md border border-gray-800/40 rounded-full px-6 py-3 flex items-center justify-between shadow-xl translate-y-2 transition-all duration-300">
+            
+            <a href="/" class="group flex items-center">
+                <span class="logo-font text-lg font-bold tracking-[0.25em] text-white group-hover:text-gray-400 transition-colors duration-300">TMV</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-400">
+                <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="/about.html">About</a>
+                <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="#services">Services</a>
+                <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="#featured-work">Featured Work</a>
+                <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="#contact">Contact</a>
+            </nav>
+
+            <a href="#contact" class="bg-white hover:bg-gray-200 text-black text-xs md:text-sm font-bold px-5 py-2.5 rounded-full inline-flex items-center gap-2 transition-all duration-300 transform hover:scale-[1.03] shadow-lg shadow-white/5">
+                Book a Shoot
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 bg-black">
+            <iframe
+                class="absolute top-1/2 left-1/2 w-[115vw] h-[64.68vw] min-w-[177.78vh] min-h-screen -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-none contrast-[105%] brightness-[110%] saturate-[102%]"
+                src="https://player.vimeo.com/video/1133308234?autoplay=1&loop=1&muted=1&autopause=0&background=1&quality=auto"
+                allow="autoplay; fullscreen"
+                title="Showreel Background">
+            </iframe>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-[#0b0f19]/40 to-[#0b0f19]/20 z-10"></div>
+        
+        <div class="relative z-20 text-center px-6 max-w-4xl flex flex-col items-center gap-5 animate-fade-up">
+            <div class="text-[11px] font-bold tracking-[0.25em] uppercase text-gray-400 bg-gray-900/40 border border-gray-800/60 backdrop-blur-sm rounded-full px-4 py-1.5">Christchurch, New Zealand</div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none drop-shadow-2xl">FPV Drones <span class="text-gray-500/60 font-light mx-2">/</span> Videography</h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl font-medium opacity-90">Aerial Media Solutions, Camera Solutions, Live Streaming Solutions.</p>
+            <div class="flex flex-col sm:flex-row gap-3 mt-4 w-full sm:w-auto">
+                <a href="https://vimeo.com/video/1133308234" target="_blank" class="w-full sm:w-auto px-7 py-3.5 bg-white text-black hover:bg-gray-100 font-bold rounded-xl transition-all shadow-xl shadow-black/20 hover:scale-[1.02]">Full Showreel</a>
+                <a href="#contact" class="w-full sm:w-auto px-7 py-3.5 bg-gray-900/40 hover:bg-gray-900/80 text-white border border-gray-700/50 backdrop-blur-sm font-bold rounded-xl transition-all hover:scale-[1.02]">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
     <section id="featured-work" class="w-full py-12 md:py-20 border-b border-gray-950 overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 mb-8">
             <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Featured Projects</h2>
             <p class="text-gray-400 font-medium mt-1">Swipe horizontally to glide seamlessly through production tracks.</p>
         </div>
 
-        <!-- Horizontal Fluid Swipe Track Window -->
         <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-8 px-4 md:px-[calc((100vw-1152px)/2)] select-none cursor-grab active:cursor-grabbing">
             
-            <!-- GRID BLOCK 1 -->
             <div class="bento-set w-[88vw] sm:w-[85vw] md:w-full max-w-6xl shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/image_50188a.jpg" alt="Project 1 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/image_50188a.jpg" alt="Project 1">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Brand Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 1</h3>
@@ -20,7 +110,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_1.jpg" alt="Project 2 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_1.jpg" alt="Project 2">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Showreel</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 2</h3>
@@ -28,7 +118,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_2.jpg" alt="Project 3 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_2.jpg" alt="Project 3">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Event Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 3</h3>
@@ -36,7 +126,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_3.jpg" alt="Project 4 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_3.jpg" alt="Project 4">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Event Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 4</h3>
@@ -44,11 +134,10 @@
                 </a>
             </div>
 
-            <!-- GRID BLOCK 2 -->
             <div class="bento-set w-[88vw] sm:w-[85vw] md:w-full max-w-6xl shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_4.jpg" alt="Project 5 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_4.jpg" alt="Project 5">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Action Sports</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 5</h3>
@@ -56,7 +145,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_5.jpg" alt="Project 6 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_5.jpg" alt="Project 6">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">FPV Chase</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 6</h3>
@@ -64,7 +153,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_6.jpg" alt="Project 7 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_6.jpg" alt="Project 7">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Automotive</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 7</h3>
@@ -72,7 +161,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_7.jpg" alt="Project 8 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_7.jpg" alt="Project 8">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Commercial</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 8</h3>
@@ -80,11 +169,10 @@
                 </a>
             </div>
 
-            <!-- GRID BLOCK 3 -->
             <div class="bento-set w-[88vw] sm:w-[85vw] md:w-full max-w-6xl shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_8.jpg" alt="Project 9 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_8.jpg" alt="Project 9">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Cinematography</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 9</h3>
@@ -92,7 +180,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_9.jpg" alt="Project 10 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_9.jpg" alt="Project 10">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Behind The Scenes</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 10</h3>
@@ -100,7 +188,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_10.jpg" alt="Project 11 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_10.jpg" alt="Project 11">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">FPV Chase</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 11</h3>
@@ -108,7 +196,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_11.jpg" alt="Project 12 Thumbnail">
+                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_11.jpg" alt="Project 12">
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Event Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 12</h3>
@@ -118,3 +206,249 @@
 
         </div>
     </section>
+
+    <section id="services" class="max-w-6xl mx-auto px-4 py-16 md:py-24 border-b border-gray-900/50">
+        <div class="mb-12">
+            <div class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-500 mb-2">Capabilities</div>
+            <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Services & Portfolios</h2>
+            <p class="text-gray-400 font-medium mt-1">Hover over any frame to preview categories. Click to view full reels.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[240px] sm:auto-rows-[280px] md:auto-rows-[320px]">
+            
+            <a href="portfolio-fpv.html" class="group block relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1138804540">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_2.jpg" alt="Cinematic FPV Drone Videography">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">01 / Aerial</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-2xl tracking-tight text-white mb-1">Cinematic FPV Drone Videography</h4>
+                        <span class="text-[11px] font-medium text-gray-400 group-hover:text-white transition-colors duration-300 flex items-center gap-1">Explore Portfolio →</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="portfolio-camera.html" class="group block relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1134792899">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_1.jpg" alt="Camera Videography">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">02 / Ground</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-xl tracking-tight text-white mb-1">Camera Videography</h4>
+                        <span class="text-[11px] font-medium text-gray-400 group-hover:text-white transition-colors duration-300 flex items-center gap-1">Explore Portfolio →</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="portfolio-stabilised-drone.html" class="group block relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1136782777">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="https://vumbnail.com/1136782777.jpg" alt="Stabilised Drone Operation">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">03 / Tech</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-xl tracking-tight text-white mb-1">Stabilised Drone Operation</h4>
+                        <span class="text-[11px] font-medium text-gray-400 group-hover:text-white transition-colors duration-300 flex items-center gap-1">Explore Portfolio →</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="portfolio-media-solutions.html" class="group block relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/Placeholder">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/placeholder.jpg" alt="Media Solutions">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">04 / Broadcast</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-2xl tracking-tight text-white mb-1">Media Solutions</h4>
+                        <span class="text-[11px] font-medium text-gray-500 tracking-wide">Temporarily Unavailable</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="contact" class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+        <div class="mb-10">
+            <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Contact</h2>
+            <p class="text-gray-400 font-medium mt-1">Ready to shoot? Drop your dates, location, and project brief below.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <div class="lg:col-span-2 bg-gradient-to-b from-gray-900/60 to-gray-950 border border-gray-800/50 rounded-2xl p-6 flex flex-col justify-between shadow-xl">
+                <div>
+                    <h3 class="text-lg font-bold mb-4 tracking-wide text-gray-100">Direct Contact</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 bg-gray-950/50 border border-gray-900 p-4 rounded-xl hover:border-gray-800 transition-colors">
+                            <div class="w-2.5 h-2.5 bg-white/40 rounded-full"></div>
+                            <a href="mailto:tommansonvisuals@gmail.com" class="text-sm font-medium text-gray-300 hover:text-white break-all">tommansonvisuals@gmail.com</a>
+                        </div>
+                        <div class="flex items-center gap-3 bg-gray-950/50 border border-gray-900 p-4 rounded-xl hover:border-gray-800 transition-colors">
+                            <div class="w-2.5 h-2.5 bg-white/40 rounded-full"></div>
+                            <a href="tel:+64226515510" class="text-sm font-medium text-gray-300 hover:text-white">022 651 5510</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-[11px] text-gray-500 font-medium mt-8 border-t border-gray-900 pt-4 leading-relaxed">
+                    * Aerial operational capacities are conditional upon target coordinates and micro-climate metrics.
+                </p>
+            </div>
+
+            <div class="lg:col-span-3 bg-gradient-to-b from-gray-900/60 to-gray-950 border border-gray-800/50 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-bold mb-4 tracking-wide text-gray-100">Project Enquiry Form</h3>
+                <div class="rounded-xl overflow-hidden border border-gray-800 bg-gray-950">
+                    <iframe
+                        class="w-full h-[450px] border-0 block"
+                        src="https://forms.gle/bSfhwhKRESSbprZo8"
+                        loading="lazy"
+                        title="Tom Manson Visuals Enquiry Form">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950/60 border-t border-gray-900/60 py-8 px-4 text-center text-xs text-gray-500">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="font-medium">© <span id="year"></span> Tom Manson Visuals. All rights reserved.</div>
+            <div class="font-medium text-gray-600">FPV Drones | Videography · Christchurch, New Zealand</div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Nav Scroll Backdrop Effect
+        const headerContainer = document.getElementById('nav-inner');
+        function handleScrollState() {
+            if (window.scrollY > 15) {
+                headerContainer.classList.remove('bg-[#111827]/40', 'translate-y-2');
+                headerContainer.classList.add('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
+            } else {
+                headerContainer.classList.remove('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
+                headerContainer.classList.add('bg-[#111827]/40', 'translate-y-2');
+            }
+        }
+        window.addEventListener('scroll', handleScrollState, { passive: true });
+        handleScrollState();
+
+        // Smooth Continuous Slider Infinite Loop Logic
+        const track = document.getElementById('bento-slider');
+        const originalSets = track.querySelectorAll('.bento-set');
+        
+        // Clone slider blocks to frame infinity wrap behavior smoothly
+        originalSets.forEach(set => {
+            const cloneAtEnd = set.cloneNode(true);
+            track.appendChild(cloneAtEnd);
+        });
+        originalSets.forEach(set => {
+            const cloneAtStart = set.cloneNode(true);
+            track.insertBefore(cloneAtStart, track.firstChild);
+        });
+
+        function getSlideMetrics() {
+            const singleSlideWidth = originalSets[0].getBoundingClientRect().width;
+            const gap = 32; 
+            return singleSlideWidth + gap;
+        }
+
+        function initHoopScroll() {
+            const stride = getSlideMetrics();
+            const originalCount = originalSets.length;
+            track.scrollLeft = stride * originalCount;
+        }
+        window.addEventListener('load', initHoopScroll);
+        window.addEventListener('resize', initHoopScroll);
+
+        let isLooping = false;
+        function updateLoopPosition() {
+            const stride = getSlideMetrics();
+            const originalCount = originalSets.length;
+            const currentX = track.scrollLeft;
+
+            const minThreshold = stride * originalCount;
+            const maxThreshold = stride * originalCount * 2;
+
+            if (currentX < minThreshold) {
+                track.scrollLeft = currentX + (stride * originalCount);
+            } else if (currentX >= maxThreshold) {
+                track.scrollLeft = currentX - (stride * originalCount);
+            }
+            isLooping = false;
+        }
+
+        track.addEventListener('scroll', () => {
+            if (!isLooping) {
+                window.requestAnimationFrame(updateLoopPosition);
+                isLooping = true;
+            }
+        }, { passive: true });
+
+
+        // Desktop Cursor Click and Drag Dragging implementation
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        track.addEventListener('mousedown', (e) => {
+            isDown = true;
+            track.classList.remove('cursor-grab');
+            track.classList.add('cursor-grabbing');
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+        });
+
+        track.addEventListener('mouseleave', () => {
+            isDown = false;
+            track.classList.remove('cursor-grabbing');
+            track.classList.add('cursor-grab');
+        });
+
+        track.addEventListener('mouseup', () => {
+            isDown = false;
+            track.classList.remove('cursor-grabbing');
+            track.classList.add('cursor-grab');
+        });
+
+        track.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 1.5; 
+            track.scrollLeft = scrollLeft - walk;
+        });
+
+
+        // Vimeo Live Previews
+        document.querySelectorAll(".vimeo-tile").forEach(tile => {
+            const iframe = tile.querySelector(".preview");
+            const baseEndpoint = tile.dataset.vimeo;
+            if (!iframe || !baseEndpoint) return;
+            const structuredURL = baseEndpoint + "?background=1&autoplay=1&muted=1&loop=1&controls=0&title=0&byline=0&portrait=0";
+            const runPreview = () => { if (iframe.src !== structuredURL) iframe.src = structuredURL; };
+            const cutPreview = () => { if (iframe.src) iframe.src = "about:blank"; };
+            tile.addEventListener("mouseenter", runPreview);
+            tile.addEventListener("mouseleave", cutPreview);
+        });
+    </script>
+</body>
+</html>
