@@ -386,11 +386,19 @@
             return singleSlideWidth + gap;
         }
 
+        // FIX: Instant structural position mapping before page rendering paint cycles
         function initHoopScroll() {
             const stride = getSlideMetrics();
             const originalCount = originalSets.length;
+            
+            // Disable any smooth scroll transitions for the initial alignment jump
+            track.style.scrollBehavior = 'auto';
             track.scrollLeft = stride * originalCount;
         }
+
+        // Run immediately when the DOM structure is mapped to eliminate the visual lag/glitch
+        document.addEventListener('DOMContentLoaded', initHoopScroll);
+        // Fallback safety hooks for asset load states and window scaling
         window.addEventListener('load', initHoopScroll);
         window.addEventListener('resize', initHoopScroll);
 
@@ -404,8 +412,10 @@
             const maxThreshold = stride * originalCount * 2;
 
             if (currentX < minThreshold) {
+                track.style.scrollBehavior = 'auto';
                 track.scrollLeft = currentX + (stride * originalCount);
             } else if (currentX >= maxThreshold) {
+                track.style.scrollBehavior = 'auto';
                 track.scrollLeft = currentX - (stride * originalCount);
             }
             isLooping = false;
