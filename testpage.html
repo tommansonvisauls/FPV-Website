@@ -105,7 +105,7 @@
             <p class="text-gray-400 font-medium mt-1">Swipe horizontally to glide seamlessly through production tracks.</p>
         </div>
 
-        <!-- Horizontal Fluid Swipe Track Window (No snap configuration) -->
+        <!-- Horizontal Fluid Swipe Track Window -->
         <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-8 px-4 md:px-[calc((100vw-1152px)/2)] select-none cursor-grab active:cursor-grabbing">
             
             <!-- GRID BLOCK 1 -->
@@ -120,7 +120,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_111</div>
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_1</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Showreel</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 2</h3>
@@ -219,65 +219,90 @@
         </div>
     </section>
 
-    <!-- 4. Services Section -->
+    <!-- 4. Services Section (Asymmetric Bento Update) -->
     <section id="services" class="max-w-6xl mx-auto px-4 py-16 md:py-24 border-b border-gray-900/50">
-        <div class="mb-10">
+        <div class="mb-12">
+            <div class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-500 mb-2">Capabilities</div>
             <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Services & Portfolios</h2>
             <p class="text-gray-400 font-medium mt-1">Hover over any frame to preview categories. Click to view full reels.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- FPV Category -->
-            <a href="portfolio-fpv.html" class="group block relative aspect-video rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1138804540">
-                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" src="assets/IMG_2.jpg" alt="Cinematic FPV Drone Videography">
-                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" src="" allow="autoplay; fullscreen"></iframe>
-                <div class="absolute inset-x-3 bottom-3 p-4 bg-gray-950/70 backdrop-blur-md border border-gray-800/50 rounded-xl flex items-center justify-between z-20">
-                    <div>
-                        <h4 class="font-bold text-sm tracking-wide text-white">Cinematic FPV Drone Videography</h4>
-                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">View Portfolio</span>
+        <!-- Modern Asymmetric Layout Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[240px] sm:auto-rows-[280px] md:auto-rows-[320px]">
+            
+            <!-- 1. FPV Category (Dominant Feature Frame) -->
+            <a href="portfolio-fpv.html" class="group block relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1138804540">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_2.jpg" alt="Cinematic FPV Drone Videography">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <!-- Floating Editorial Typography -->
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">01 / Aerial</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
                     </div>
-                    <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">▶</div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-2xl tracking-tight text-white mb-1">Cinematic FPV Drone Videography</h4>
+                        <span class="text-[11px] font-medium text-gray-400 group-hover:text-white transition-colors duration-300 flex items-center gap-1">Explore Portfolio →</span>
+                    </div>
                 </div>
             </a>
 
-            <!-- Camera Videography Category -->
-            <a href="portfolio-camera.html" class="group block relative aspect-video rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1134792899">
-                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" src="assets/IMG_1.jpg" alt="Camera Videography">
-                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" src="" allow="autoplay; fullscreen"></iframe>
-                <div class="absolute inset-x-3 bottom-3 p-4 bg-gray-950/70 backdrop-blur-md border border-gray-800/50 rounded-xl flex items-center justify-between z-20">
-                    <div>
-                        <h4 class="font-bold text-sm tracking-wide text-white">Camera Videography</h4>
-                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">View Portfolio</span>
+            <!-- 2. Camera Videography (Accent Frame) -->
+            <a href="portfolio-camera.html" class="group block relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1134792899">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_1.jpg" alt="Camera Videography">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">02 / Ground</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
                     </div>
-                    <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">▶</div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-xl tracking-tight text-white mb-1">Camera Videography</h4>
+                        <span class="text-[11px] font-medium text-gray-400 group-hover:text-white transition-colors duration-300 flex items-center gap-1">Explore Portfolio →</span>
+                    </div>
                 </div>
             </a>
 
-            <!-- Media Solutions Category -->
-            <a href="portfolio-media-solutions.html" class="group block relative aspect-video rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/Place Holder">
-                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" src="assets/placeholder.jpg" alt="Media Solutions">
-                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" src="" allow="autoplay; fullscreen"></iframe>
-                <div class="absolute inset-x-3 bottom-3 p-4 bg-gray-950/70 backdrop-blur-md border border-gray-800/50 rounded-xl flex items-center justify-between z-20">
-                    <div>
-                        <h4 class="font-bold text-sm tracking-wide text-white">Media Solutions</h4>
-                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Temporarily Unavailable</span>
+            <!-- 3. Stabilised Drone Operation (Accent Frame) -->
+            <a href="portfolio-stabilised-drone.html" class="group block relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1136782777">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="https://vumbnail.com/1136782777.jpg" alt="Stabilised Drone Operation">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">03 / Tech</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
                     </div>
-                    <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">▶</div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-xl tracking-tight text-white mb-1">Stabilised Drone Operation</h4>
+                        <span class="text-[11px] font-medium text-gray-400 group-hover:text-white transition-colors duration-300 flex items-center gap-1">Explore Portfolio →</span>
+                    </div>
                 </div>
             </a>
 
-            <!-- Stabilised Drone Operation Category -->
-            <a href="portfolio-stabilised-drone.html" class="group block relative aspect-video rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1136782777">
-                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" src="https://vumbnail.com/1136782777.jpg" alt="Stabilised Drone Operation">
-                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300" src="" allow="autoplay; fullscreen"></iframe>
-                <div class="absolute inset-x-3 bottom-3 p-4 bg-gray-950/70 backdrop-blur-md border border-gray-800/50 rounded-xl flex items-center justify-between z-20">
-                    <div>
-                        <h4 class="font-bold text-sm tracking-wide text-white">Stabilised Drone Operation</h4>
-                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">View Portfolio</span>
+            <!-- 4. Media Solutions (Dominant Feature Frame) -->
+            <a href="portfolio-media-solutions.html" class="group block relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/Place Holder">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
+                <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/placeholder.jpg" alt="Media Solutions">
+                <iframe class="preview absolute inset-0 w-full h-full border-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" src="" allow="autoplay; fullscreen"></iframe>
+                
+                <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] uppercase font-bold text-white/50 tracking-widest border border-white/10 bg-black/20 backdrop-blur-sm px-2.5 py-1 rounded">04 / Broadcast</span>
+                        <div class="w-9 h-9 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs opacity-0 scale-70 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-white/10">▶</div>
                     </div>
-                    <div class="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">▶</div>
+                    <div>
+                        <h4 class="font-extrabold text-lg md:text-2xl tracking-tight text-white mb-1">Media Solutions</h4>
+                        <span class="text-[11px] font-medium text-gray-500 tracking-wide">Temporarily Unavailable</span>
+                    </div>
                 </div>
             </a>
+
         </div>
     </section>
 
@@ -378,7 +403,7 @@
         window.addEventListener('load', initHoopScroll);
         window.addEventListener('resize', initHoopScroll);
 
-        // Frame-accurate boundary resetting using requestAnimationFrame (No timeouts/lag)
+        // Frame-accurate boundary resetting using requestAnimationFrame
         let isLooping = false;
         function updateLoopPosition() {
             const stride = getSlideMetrics();
@@ -389,10 +414,8 @@
             const maxThreshold = stride * originalCount * 2;
 
             if (currentX < minThreshold) {
-                // Instantly teleport forward by the exact length of the original group
                 track.scrollLeft = currentX + (stride * originalCount);
             } else if (currentX >= maxThreshold) {
-                // Instantly teleport backward by the exact length of the original group
                 track.scrollLeft = currentX - (stride * originalCount);
             }
             isLooping = false;
@@ -406,7 +429,7 @@
         }, { passive: true });
 
 
-        // Desktop Desktop Cursor Grabbing / Dragging implementation
+        // Desktop Cursor Grabbing / Dragging implementation
         let isDown = false;
         let startX;
         let scrollLeft;
