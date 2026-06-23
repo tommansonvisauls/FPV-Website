@@ -12,10 +12,12 @@
     <meta name="description" content="Tom Manson Visuals — FPV drones & videography. Based in Christchurch, New Zealand. Showreels, action sports, events, and creative projects." />
     <meta name="theme-color" content="#000000" />
 
+    <!-- Open Graph -->
     <meta property="og:title" content="Tom Manson Visuals — FPV Drones | Videography" />
     <meta property="og:description" content="FPV drones & Videography. Christchurch, New Zealand." />
     <meta property="og:type" content="website" />
 
+    <!-- Tailwind CSS & Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&family=Syncopate:wght=700&display=swap');
@@ -46,13 +48,16 @@
 </head>
 <body class="text-white min-h-screen overflow-x-hidden antialiased selection:bg-white/10">
 
+    <!-- 1. Header / Navigation -->
     <header class="nav fixed inset-x-0 top-0 z-50 flex items-center justify-center h-20 px-4 md:px-8 pointer-events-none">
         <div id="nav-inner" class="pointer-events-auto w-full max-w-6xl bg-[#111827]/40 backdrop-blur-md border border-gray-800/40 rounded-full px-6 py-3 flex items-center justify-between shadow-xl translate-y-2 transition-all duration-300">
             
+            <!-- Minimal Logo -->
             <a href="/" class="group flex items-center">
                 <span class="logo-font text-lg font-bold tracking-[0.25em] text-white group-hover:text-gray-400 transition-colors duration-300">TMV</span>
             </a>
             
+            <!-- Links -->
             <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-400">
                 <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="/about.html">About</a>
                 <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="#services">Services</a>
@@ -60,6 +65,7 @@
                 <a class="hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-gray-800/30" href="#contact">Contact</a>
             </nav>
 
+            <!-- Monochromatic CTA -->
             <a href="#contact" class="bg-white hover:bg-gray-200 text-black text-xs md:text-sm font-bold px-5 py-2.5 rounded-full inline-flex items-center gap-2 transition-all duration-300 transform hover:scale-[1.03] shadow-lg shadow-white/5">
                 Book a Shoot
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,6 +75,7 @@
         </div>
     </header>
 
+    <!-- 2. Hero Section -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0 bg-black">
             <iframe
@@ -91,15 +98,19 @@
         </div>
     </section>
 
+    <!-- 3. Featured Projects Slider Section -->
     <section id="featured-work" class="w-full py-12 md:py-20 border-b border-gray-950 overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 mb-8">
             <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Featured Projects</h2>
             <p class="text-gray-400 font-medium mt-1">Swipe horizontally to glide seamlessly through production tracks.</p>
         </div>
 
+        <!-- Horizontal Slider Window -->
         <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-8 px-4 md:px-[calc((100vw-1152px)/2)] select-none cursor-grab active:cursor-grabbing">
             
+            <!-- GRID BLOCK 1 -->
             <div class="bento-set w-[88vw] sm:w-[85vw] md:w-full max-w-6xl shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+                <!-- Project 1 (Uses your specific thumbnail file) -->
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
                     <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/image_50188a.jpg" alt="Project 1">
@@ -108,25 +119,28 @@
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 1</h3>
                     </div>
                 </a>
+                <!-- Project 2 (Placeholder) -->
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_1.jpg" alt="Project 2">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_1</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Showreel</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 2</h3>
                     </div>
                 </a>
+                <!-- Project 3 (Placeholder) -->
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_2.jpg" alt="Project 3">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_2</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Event Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 3</h3>
                     </div>
                 </a>
+                <!-- Project 4 (Placeholder) -->
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_3.jpg" alt="Project 4">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_3</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Event Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 4</h3>
@@ -134,10 +148,11 @@
                 </a>
             </div>
 
+            <!-- GRID BLOCK 2 -->
             <div class="bento-set w-[88vw] sm:w-[85vw] md:w-full max-w-6xl shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_4.jpg" alt="Project 5">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_4</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Action Sports</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 5</h3>
@@ -145,7 +160,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_5.jpg" alt="Project 6">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_5</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">FPV Chase</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 6</h3>
@@ -153,7 +168,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_6.jpg" alt="Project 7">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_6</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Automotive</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 7</h3>
@@ -161,7 +176,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_7.jpg" alt="Project 8">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_7</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Commercial</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 8</h3>
@@ -169,10 +184,11 @@
                 </a>
             </div>
 
+            <!-- GRID BLOCK 3 -->
             <div class="bento-set w-[88vw] sm:w-[85vw] md:w-full max-w-6xl shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_8.jpg" alt="Project 9">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_8</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Cinematography</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 9</h3>
@@ -180,7 +196,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_9.jpg" alt="Project 10">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_9</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Behind The Scenes</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 10</h3>
@@ -188,7 +204,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_10.jpg" alt="Project 11">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_10</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">FPV Chase</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 11</h3>
@@ -196,7 +212,7 @@
                 </a>
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
-                    <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_11.jpg" alt="Project 12">
+                    <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_11</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full">
                         <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">Event Film</p>
                         <h3 class="text-base md:text-xl font-bold tracking-tight text-white group-hover:text-gray-300 transition-colors">Project 12</h3>
@@ -207,6 +223,7 @@
         </div>
     </section>
 
+    <!-- 4. Services Section -->
     <section id="services" class="max-w-6xl mx-auto px-4 py-16 md:py-24 border-b border-gray-900/50">
         <div class="mb-12">
             <div class="text-[10px] font-bold tracking-[0.25em] uppercase text-gray-500 mb-2">Capabilities</div>
@@ -214,8 +231,10 @@
             <p class="text-gray-400 font-medium mt-1">Hover over any frame to preview categories. Click to view full reels.</p>
         </div>
 
+        <!-- Modern Asymmetric Bento Layout Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[240px] sm:auto-rows-[280px] md:auto-rows-[320px]">
             
+            <!-- 1. FPV Category (Dominant 2-Column Frame) -->
             <a href="portfolio-fpv.html" class="group block relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1138804540">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_2.jpg" alt="Cinematic FPV Drone Videography">
@@ -233,6 +252,7 @@
                 </div>
             </a>
 
+            <!-- 2. Camera Videography (Accent 1-Column Frame) -->
             <a href="portfolio-camera.html" class="group block relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1134792899">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/IMG_1.jpg" alt="Camera Videography">
@@ -250,6 +270,7 @@
                 </div>
             </a>
 
+            <!-- 3. Stabilised Drone Operation (Accent 1-Column Frame) -->
             <a href="portfolio-stabilised-drone.html" class="group block relative md:col-span-1 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/1136782777">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="https://vumbnail.com/1136782777.jpg" alt="Stabilised Drone Operation">
@@ -267,6 +288,7 @@
                 </div>
             </a>
 
+            <!-- 4. Media Solutions (Dominant 2-Column Frame) -->
             <a href="portfolio-media-solutions.html" class="group block relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-gray-950 shadow-xl tile vimeo-tile" data-vimeo="https://player.vimeo.com/video/Placeholder">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
                 <img class="thumb absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/placeholder.jpg" alt="Media Solutions">
@@ -287,6 +309,7 @@
         </div>
     </section>
 
+    <!-- 5. Contact Section -->
     <section id="contact" class="max-w-6xl mx-auto px-4 py-16 md:py-24">
         <div class="mb-10">
             <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight">Contact</h2>
@@ -294,6 +317,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <!-- Details Panel -->
             <div class="lg:col-span-2 bg-gradient-to-b from-gray-900/60 to-gray-950 border border-gray-800/50 rounded-2xl p-6 flex flex-col justify-between shadow-xl">
                 <div>
                     <h3 class="text-lg font-bold mb-4 tracking-wide text-gray-100">Direct Contact</h3>
@@ -313,6 +337,7 @@
                 </p>
             </div>
 
+            <!-- Form Wrapper -->
             <div class="lg:col-span-3 bg-gradient-to-b from-gray-900/60 to-gray-950 border border-gray-800/50 rounded-2xl p-6 shadow-xl">
                 <h3 class="text-lg font-bold mb-4 tracking-wide text-gray-100">Project Enquiry Form</h3>
                 <div class="rounded-xl overflow-hidden border border-gray-800 bg-gray-950">
@@ -327,6 +352,7 @@
         </div>
     </section>
 
+    <!-- 6. Footer Layout -->
     <footer class="bg-gray-950/60 border-t border-gray-900/60 py-8 px-4 text-center text-xs text-gray-500">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="font-medium">© <span id="year"></span> Tom Manson Visuals. All rights reserved.</div>
@@ -334,6 +360,7 @@
         </div>
     </footer>
 
+    <!-- Script Implementations -->
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
