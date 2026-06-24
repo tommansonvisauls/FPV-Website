@@ -378,92 +378,103 @@
     </footer>
 
     <!-- Script Implementations -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+   <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Nav Scroll Backdrop Effect
-        const headerContainer = document.getElementById('nav-inner');
-        function handleScrollState() {
-            if (window.scrollY > 15) {
-                headerContainer.classList.remove('bg-[#111827]/40', 'translate-y-2');
-                headerContainer.classList.add('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
-            } else {
-                headerContainer.classList.remove('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
-                headerContainer.classList.add('bg-[#111827]/40', 'translate-y-2');
-            }
+    // Nav Scroll Backdrop Effect
+    const headerContainer = document.getElementById('nav-inner');
+    function handleScrollState() {
+        if (window.scrollY > 15) {
+            headerContainer.classList.remove('bg-[#111827]/40', 'translate-y-2');
+            headerContainer.classList.add('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
+        } else {
+            headerContainer.classList.remove('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
+            headerContainer.classList.add('bg-[#111827]/40', 'translate-y-2');
         }
-        window.addEventListener('scroll', handleScrollState, { passive: true });
-        handleScrollState();
+    }
+    window.addEventListener('scroll', handleScrollState, { passive: true });
+    handleScrollState();
 
-        // Smooth Continuous Slider Infinite Loop Logic
-        const track = document.getElementById('bento-slider');
-        const originalSets = track.querySelectorAll('.bento-set');
+    // Smooth Continuous Slider Infinite Loop Logic
+    const track = document.getElementById('bento-slider');
+    const originalSets = track.querySelectorAll('.bento-set');
+    
+    originalSets.forEach(set => {
+        const cloneAtEnd = set.cloneNode(true);
+        track.appendChild(cloneAtEnd);
+    });
+    originalSets.forEach(set => {
+        const cloneAtStart = set.cloneNode(true);
+        track.insertBefore(cloneAtStart, track.firstChild);
+    });
+
+    function getSlideMetrics() {
+        const singleSlideWidth = originalSets[0].getBoundingClientRect().width;
+        const gap = 32; 
+        return singleSlideWidth + gap;
+    }
+
+    function initHoopScroll() {
+        const stride = getSlideMetrics();
+        const originalCount = originalSets.length;
+        track.style.scrollBehavior = 'auto';
+        track.scrollLeft = stride * originalCount;
+    }
+
+    document.addEventListener('DOMContentLoaded', initHoopScroll);
+    window.addEventListener('resize', initHoopScroll);
+
+    // FIXED: Form Submission using URLSearchParams
+    const form = document.getElementById('native-enquiry-form');
+    const submitBtn = document.getElementById('form-submit-btn');
+    const feedback = document.getElementById('form-feedback');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        // Clone slider blocks to frame infinity wrap behavior smoothly
-        originalSets.forEach(set => {
-            const cloneAtEnd = set.cloneNode(true);
-            track.appendChild(cloneAtEnd);
-        });
-        originalSets.forEach(set => {
-            const cloneAtStart = set.cloneNode(true);
-            track.insertBefore(cloneAtStart, track.firstChild);
-        });
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Sending Brief...";
+        feedback.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
+        feedback.classList.add('text-gray-400');
+        feedback.innerText = "Syncing parameters...";
 
-        function getSlideMetrics() {
-            const singleSlideWidth = originalSets[0].getBoundingClientRect().width;
-            const gap = 32; 
-            return singleSlideWidth + gap;
+        const googleFormActionUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSf2O_xVepvNshvIuOIsE87i-kHlC2V_Eexr-w0L7L9uP5_Ypw/formResponse';
+        
+        // Convert FormData to standard URL-encoded format expected by Google Forms
+        const formData = new FormData(form);
+        const urlEncodedData = new URLSearchParams();
+        
+        for (const pair of formData.entries()) {
+            urlEncodedData.append(pair[0], pair[1]);
         }
 
-        function initHoopScroll() {
-            const stride = getSlideMetrics();
-            const originalCount = originalSets.length;
-            track.style.scrollBehavior = 'auto';
-            track.scrollLeft = stride * originalCount;
-        }
-
-        document.addEventListener('DOMContentLoaded', initHoopScroll);
-        window.addEventListener('resize', initHoopScroll);
-
-        // Native Form Submission Intercept Logic (Submits asynchronously to your Google Form)
-        const form = document.getElementById('native-enquiry-form');
-        const submitBtn = document.getElementById('form-submit-btn');
-        const feedback = document.getElementById('form-feedback');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Sending Brief...";
-            feedback.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
-            feedback.classList.add('text-gray-400');
-            feedback.innerText = "Syncing parameters...";
-
-            // Action target endpoint derived from Google Forms base handling structure
-            const googleFormActionUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSf2O_xVepvNshvIuOIsE87i-kHlC2V_Eexr-w0L7L9uP5_Ypw/formResponse';
-            const formData = new FormData(form);
-
-            fetch(googleFormActionUrl, {
-                method: 'POST',
-                body: formData,
-                mode: 'no-cors' // Bypasses cross-origin restrictions cleanly for Google Form collection targets
-            })
-            .then(() => {
-                feedback.classList.remove('text-gray-400');
-                feedback.classList.add('text-emerald-400');
-                feedback.innerText = "Enquiry received successfully. Talk soon.";
-                form.reset();
-                submitBtn.innerText = "Submitted ✓";
-            })
-            .catch((error) => {
-                console.error('Submission error:', error);
-                feedback.classList.remove('text-gray-400');
-                feedback.classList.add('text-rose-400');
-                feedback.innerText = "Submission pipeline failure. Please trace direct details.";
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Submit Details";
-            });
+        fetch(googleFormActionUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: urlEncodedData.toString()
+        })
+        .then(() => {
+            // Because mode is 'no-cors', we won't get a readable response body,
+            // but a successful dispatch triggers the .then block cleanly.
+            feedback.classList.remove('text-gray-400');
+            feedback.classList.add('text-emerald-400');
+            feedback.innerText = "Enquiry received successfully. Talk soon.";
+            form.reset();
+            submitBtn.innerText = "Submitted ✓";
+        })
+        .catch((error) => {
+            console.error('Submission error:', error);
+            feedback.classList.remove('text-gray-400');
+            feedback.classList.add('text-rose-400');
+            feedback.innerText = "Submission pipeline failure. Please trace direct details.";
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit Details";
         });
-    </script>
+    });
+
+        </script>
 </body>
 </html>
