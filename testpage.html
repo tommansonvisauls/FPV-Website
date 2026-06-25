@@ -4,7 +4,7 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="31c4ca4f-3261-49e6-9ea8-27fb78f12a82"></script>
     <link class="rounded-full" rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+    <link class="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -83,7 +83,7 @@
                 src="https://player.vimeo.com/video/1133308234?autoplay=1&loop=1&muted=1&autopause=0&background=1&quality=auto"
                 allow="autoplay; fullscreen"
                 title="Showreel Background">
-            </iframe>
+            </iframe >
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-[#0b0f19]/40 to-[#0b0f19]/20 z-10"></div>
         
@@ -105,11 +105,11 @@
             <p class="text-gray-400 font-medium mt-1">Swipe horizontally to glide seamlessly through production tracks.</p>
         </div>
 
-        <!-- Safe, responsive scroll-snap layout container that prevents unexpected element duplicates -->
-        <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-6 px-4 md:px-[calc((100vw-1152px)/2)] scroll-smooth snap-x snap-mandatory select-none cursor-grab active:cursor-grabbing">
+        <!-- Horizontal Slider Window with Fixed Outer Fluid Spacing -->
+        <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-6 px-4 md:px-[calc((100vw-1152px)/2)] select-none cursor-grab active:cursor-grabbing">
             
             <!-- GRID BLOCK 1 -->
-            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 snap-center grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <!-- Project 1 -->
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/image_50188a.jpg" alt="Project 1">
@@ -145,7 +145,7 @@
             </div>
 
             <!-- GRID BLOCK 2 -->
-            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 snap-center grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_4</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -177,7 +177,7 @@
             </div>
 
             <!-- GRID BLOCK 3 -->
-            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 snap-center grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_8</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -363,135 +363,84 @@
                     </button>
                     
                     <!-- Success/Error Feedback Messages -->
-                    <div id="form-feedback" class="text-xs font-semibold tracking-wide text-center hidden"></div>
+                    <div id="form-feedback" class="text-xs font-semibold tracking-wide text-center mt-3 hidden"></div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- 6. Footer -->
-    <footer class="w-full border-t border-gray-900/40 bg-gray-950/20 py-8 text-center text-xs text-gray-500 font-medium">
-        <p>&copy; 2026 Tom Manson Visuals. All Rights Reserved.</p>
-    </footer>
-
-    <!-- JavaScript Core Execution System -->
+    <!-- Infinite Loop & Drag Physics Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.getElementById('bento-slider');
+            if (!slider) return;
+
+            const originalBlocks = Array.from(slider.children);
+            const gap = 24; // Tailwind gap-6 is 24px
+
+            // 1. Setup Infinite Loop Structure (Clone first and last items)
+            const firstClone = originalBlocks[0].cloneNode(true);
+            const lastClone = originalBlocks[originalBlocks.length - 1].cloneNode(true);
             
-            // --- 1. Header Navigation Dynamics ---
-            const headerInner = document.getElementById('nav-inner');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    headerInner.classList.remove('bg-[#111827]/40', 'translate-y-2');
-                    headerInner.classList.add('bg-[#111827]/80', 'py-2.5', 'translate-y-1', 'border-gray-800/80');
-                } else {
-                    headerInner.classList.add('bg-[#111827]/40', 'translate-y-2');
-                    headerInner.classList.remove('bg-[#111827]/80', 'py-2.5', 'translate-y-1', 'border-gray-800/80');
+            slider.appendChild(firstClone);
+            slider.insertBefore(lastClone, slider.firstChild);
+
+            // Calculate widths
+            const getBlockWidth = () => originalBlocks[0].offsetWidth + gap;
+            
+            // Set initial position to original first element (skipping the prepended clone)
+            const resetToFirst = () => {
+                slider.scrollLeft = getBlockWidth();
+            };
+            
+            // Wait for styles/layout to settle to get accurate bounding metrics
+            setTimeout(resetToFirst, 50);
+
+            // 2. Continuous Boundaries Snap Observer
+            slider.addEventListener('scroll', () => {
+                const blockWidth = getBlockWidth();
+                const totalOriginalWidth = blockWidth * originalBlocks.length;
+
+                // If scrolled all the way left into the prepended clone
+                if (slider.scrollLeft <= 0) {
+                    slider.scrollLeft = totalOriginalWidth;
+                } 
+                // If scrolled all the way right into the appended clone
+                else if (slider.scrollLeft >= totalOriginalWidth + blockWidth) {
+                    slider.scrollLeft = blockWidth;
                 }
             });
 
-            // --- 2. Infinite Loop Slider System (Grab & Drag) ---
-            const slider = document.getElementById('bento-slider');
+            // 3. Desktop Drag-to-Scroll Functionality
             let isDown = false;
             let startX;
             let scrollLeft;
 
             slider.addEventListener('mousedown', (e) => {
                 isDown = true;
-                slider.classList.add('grabbing');
+                slider.classList.add('active');
                 startX = e.pageX - slider.offsetLeft;
                 scrollLeft = slider.scrollLeft;
             });
 
             slider.addEventListener('mouseleave', () => {
                 isDown = false;
-                slider.classList.remove('grabbing');
             });
 
             slider.addEventListener('mouseup', () => {
                 isDown = false;
-                slider.classList.remove('grabbing');
             });
 
             slider.addEventListener('mousemove', (e) => {
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - slider.offsetLeft;
-                const walk = (x - startX) * 1.5; // Scroll speed multiplier
+                const walk = (x - startX) * 1.5; // Drag sensitivity multiplier
                 slider.scrollLeft = scrollLeft - walk;
             });
 
-            // Seamless Edge Wrap Loop Simulation
-            slider.addEventListener('scroll', () => {
-                const maxScroll = slider.scrollWidth - slider.clientWidth;
-                if (slider.scrollLeft >= maxScroll - 1) {
-                    // Soft bounce back to first index instead of locking up layout trees
-                    setTimeout(() => { if (!isDown) slider.scrollTo({ left: 1, behavior: 'smooth' }); }, 1500);
-                } else if (slider.scrollLeft <= 0) {
-                    setTimeout(() => { if (!isDown) slider.scrollTo({ left: maxScroll - 1, behavior: 'smooth' }); }, 1500);
-                }
-            });
-
-            // --- 3. Dynamic Vimeo Hover Engine ---
-            const vimeoTiles = document.querySelectorAll('.vimeo-tile');
-            
-            vimeoTiles.forEach(tile => {
-                const iframe = tile.querySelector('.preview');
-                const thumb = tile.querySelector('.thumb');
-                const rawUrl = tile.getAttribute('data-vimeo');
-                
-                if (!rawUrl || rawUrl.includes('Placeholder')) return;
-
-                // Extract Vimeo ID cleanly
-                const vimeoId = rawUrl.split('/').pop().split('?')[0];
-                const optimizedEmbedUrl = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&loop=1&muted=1&background=1&quality=360p`;
-
-                tile.addEventListener('mouseenter', () => {
-                    if (iframe && !iframe.getAttribute('src')) {
-                        iframe.setAttribute('src', optimizedEmbedUrl);
-                    }
-                    if (iframe) iframe.classList.remove('opacity-0');
-                    if (thumb) thumb.classList.add('opacity-0', 'scale-[1.02]');
-                });
-
-                tile.addEventListener('mouseleave', () => {
-                    if (iframe) iframe.classList.add('opacity-0');
-                    if (thumb) thumb.classList.remove('opacity-0', 'scale-[1.02]');
-                });
-            });
-
-            // --- 4. Form Action Processing Pipeline ---
-            const form = document.getElementById('native-enquiry-form');
-            const feedback = document.getElementById('form-feedback');
-            const submitBtn = document.getElementById('form-submit-btn');
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                submitBtn.disabled = true;
-                submitBtn.innerText = "Transmitting Brief...";
-
-                const formData = new FormData(form);
-                // Google Forms Endpoint Construction URL
-                const targetAction = 'https://docs.google.com/forms/d/e/1FAIpQLSfD_Gg_YourActualFormIdHere/formResponse';
-
-                try {
-                    await fetch(targetAction, {
-                        method: 'POST',
-                        body: formData,
-                        mode: 'no-cors'
-                    });
-                    
-                    feedback.className = "text-xs font-semibold tracking-wide text-center mt-4 text-emerald-400 block";
-                    feedback.innerText = "Brief successfully logged. I'll get back to you soon.";
-                    form.reset();
-                } catch (error) {
-                    feedback.className = "text-xs font-semibold tracking-wide text-center mt-4 text-rose-400 block";
-                    feedback.innerText = "Transmission interruption. Please email direct link directly.";
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = `Submit Details <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>`;
-                }
-            });
+            // Re-center if screen resizing shifts grid dimensions
+            window.addEventListener('resize', resetToFirst);
         });
     </script>
 </body>
