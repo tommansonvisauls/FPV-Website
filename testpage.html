@@ -105,11 +105,11 @@
             <p class="text-gray-400 font-medium mt-1">Swipe horizontally to glide seamlessly through production tracks.</p>
         </div>
 
-        <!-- Horizontal Slider Window with Fixed Outer Fluid Spacing -->
-        <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-6 px-4 md:px-[calc((100vw-1152px)/2)] select-none cursor-grab active:cursor-grabbing">
+        <!-- Safe, responsive scroll-snap layout container that prevents unexpected element duplicates -->
+        <div id="bento-slider" class="flex overflow-x-auto hide-scrollbar gap-6 px-4 md:px-[calc((100vw-1152px)/2)] scroll-smooth snap-x snap-mandatory select-none cursor-grab active:cursor-grabbing">
             
             <!-- GRID BLOCK 1 -->
-            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 snap-center grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <!-- Project 1 -->
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out" src="assets/image_50188a.jpg" alt="Project 1">
@@ -145,7 +145,7 @@
             </div>
 
             <!-- GRID BLOCK 2 -->
-            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 snap-center grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_4</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -177,7 +177,7 @@
             </div>
 
             <!-- GRID BLOCK 3 -->
-            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
+            <div class="bento-set w-[85vw] sm:w-[80vw] md:w-[1152px] shrink-0 snap-center grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[220px] sm:auto-rows-[260px] md:auto-rows-[340px]">
                 <a href="https://youtube.com/placeholder" target="_blank" class="group relative md:col-span-2 rounded-2xl overflow-hidden border border-gray-800/40 bg-[#111827] transition-all duration-500 hover:border-gray-700/60 shadow-lg">
                     <div class="absolute inset-0 flex items-center justify-center text-gray-700 font-extrabold text-2xl tracking-widest bg-[#1e293b]">IMG_8</div>
                     <div class="absolute bottom-0 left-0 p-6 z-20 w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
@@ -391,35 +391,6 @@
         }
         window.addEventListener('scroll', handleScrollState, { passive: true });
         handleScrollState();
-
-        // Smooth Continuous Slider Infinite Loop Logic (Polished Gap Metrics)
-        const track = document.getElementById('bento-slider');
-        const originalSets = track.querySelectorAll('.bento-set');
-        
-        originalSets.forEach(set => {
-            const cloneAtEnd = set.cloneNode(true);
-            track.appendChild(cloneAtEnd);
-        });
-        originalSets.forEach(set => {
-            const cloneAtStart = set.cloneNode(true);
-            track.insertBefore(cloneAtStart, track.firstChild);
-        });
-
-        function getSlideMetrics() {
-            const singleSlideWidth = originalSets[0].getBoundingClientRect().width;
-            const gap = 24; // Formally matched to Tailwind gap-6 (24px)
-            return singleSlideWidth + gap;
-        }
-
-        function initHoopScroll() {
-            const stride = getSlideMetrics();
-            const originalCount = originalSets.length;
-            track.style.scrollBehavior = 'auto';
-            track.scrollLeft = stride * originalCount;
-        }
-
-        document.addEventListener('DOMContentLoaded', initHoopScroll);
-        window.addEventListener('resize', initHoopScroll);
 
         // Form Submission using URLSearchParams
         const form = document.getElementById('native-enquiry-form');
