@@ -363,80 +363,134 @@
                     </button>
                     
                     <!-- Success/Error Feedback Messages -->
-                    <div id="form-feedback" class="text-xs font-semibold tracking-wide text-center mt-3 hidden"></div>
+                    <div id="form-feedback" class="text-xs font-semibold tracking-wide text-center hidden"></div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- 6. Footer Layout -->
-    <footer class="w-full border-t border-gray-900/60 bg-[#0b0f19] py-8 text-center text-xs text-gray-500 font-medium">
-        <p>&copy; <span id="year"></span> Tom Manson Visuals. All Rights Reserved.</p>
+    <!-- 6. Footer -->
+    <footer class="w-full border-t border-gray-900/40 bg-gray-950/20 py-8 text-center text-xs text-gray-500 font-medium">
+        <p>&copy; 2026 Tom Manson Visuals. All Rights Reserved.</p>
     </footer>
 
-    <!-- Script Block for UI Interactions & Form Submission -->
+    <!-- JavaScript Core Execution System -->
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Nav Scroll Backdrop Effect
-        const headerContainer = document.getElementById('nav-inner');
-        function handleScrollState() {
-            if (window.scrollY > 15) {
-                headerContainer.classList.remove('bg-[#111827]/40', 'translate-y-2');
-                headerContainer.classList.add('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
-            } else {
-                headerContainer.classList.remove('bg-[#0b0f19]/80', 'shadow-2xl', 'border-gray-800');
-                headerContainer.classList.add('bg-[#111827]/40', 'translate-y-2');
-            }
-        }
-        window.addEventListener('scroll', handleScrollState, { passive: true });
-        handleScrollState();
-
-        // Form Submission using URLSearchParams
-        const form = document.getElementById('native-enquiry-form');
-        const submitBtn = document.getElementById('form-submit-btn');
-        const feedback = document.getElementById('form-feedback');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', () => {
             
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Sending Brief...";
-            feedback.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
-            feedback.classList.add('text-gray-400');
-            feedback.innerText = "Syncing parameters...";
+            // --- 1. Header Navigation Dynamics ---
+            const headerInner = document.getElementById('nav-inner');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    headerInner.classList.remove('bg-[#111827]/40', 'translate-y-2');
+                    headerInner.classList.add('bg-[#111827]/80', 'py-2.5', 'translate-y-1', 'border-gray-800/80');
+                } else {
+                    headerInner.classList.add('bg-[#111827]/40', 'translate-y-2');
+                    headerInner.classList.remove('bg-[#111827]/80', 'py-2.5', 'translate-y-1', 'border-gray-800/80');
+                }
+            });
 
-            const googleFormActionUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSf2O_xVepvNshvIuOIsE87i-kHlC2V_Eexr-w0L7L9uP5_Ypw/formResponse';
-            
-            const formData = new FormData(form);
-            const urlEncodedData = new URLSearchParams();
-            
-            for (const pair of formData.entries()) {
-                urlEncodedData.append(pair[0], pair[1]);
-            }
+            // --- 2. Infinite Loop Slider System (Grab & Drag) ---
+            const slider = document.getElementById('bento-slider');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-            fetch(googleFormActionUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: urlEncodedData.toString()
-            })
-            .then(() => {
-                feedback.classList.remove('text-gray-400');
-                feedback.classList.add('text-emerald-400');
-                feedback.innerText = "Enquiry received successfully. Talk soon.";
-                form.reset();
-                submitBtn.innerText = "Submitted ✓";
-            })
-            .catch((error) => {
-                console.error('Submission error:', error);
-                feedback.classList.remove('text-gray-400');
-                feedback.classList.add('text-rose-400');
-                feedback.innerText = "Submission pipeline failure. Please trace direct details.";
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Submit Details";
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('grabbing');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('grabbing');
+            });
+
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('grabbing');
+            });
+
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 1.5; // Scroll speed multiplier
+                slider.scrollLeft = scrollLeft - walk;
+            });
+
+            // Seamless Edge Wrap Loop Simulation
+            slider.addEventListener('scroll', () => {
+                const maxScroll = slider.scrollWidth - slider.clientWidth;
+                if (slider.scrollLeft >= maxScroll - 1) {
+                    // Soft bounce back to first index instead of locking up layout trees
+                    setTimeout(() => { if (!isDown) slider.scrollTo({ left: 1, behavior: 'smooth' }); }, 1500);
+                } else if (slider.scrollLeft <= 0) {
+                    setTimeout(() => { if (!isDown) slider.scrollTo({ left: maxScroll - 1, behavior: 'smooth' }); }, 1500);
+                }
+            });
+
+            // --- 3. Dynamic Vimeo Hover Engine ---
+            const vimeoTiles = document.querySelectorAll('.vimeo-tile');
+            
+            vimeoTiles.forEach(tile => {
+                const iframe = tile.querySelector('.preview');
+                const thumb = tile.querySelector('.thumb');
+                const rawUrl = tile.getAttribute('data-vimeo');
+                
+                if (!rawUrl || rawUrl.includes('Placeholder')) return;
+
+                // Extract Vimeo ID cleanly
+                const vimeoId = rawUrl.split('/').pop().split('?')[0];
+                const optimizedEmbedUrl = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&loop=1&muted=1&background=1&quality=360p`;
+
+                tile.addEventListener('mouseenter', () => {
+                    if (iframe && !iframe.getAttribute('src')) {
+                        iframe.setAttribute('src', optimizedEmbedUrl);
+                    }
+                    if (iframe) iframe.classList.remove('opacity-0');
+                    if (thumb) thumb.classList.add('opacity-0', 'scale-[1.02]');
+                });
+
+                tile.addEventListener('mouseleave', () => {
+                    if (iframe) iframe.classList.add('opacity-0');
+                    if (thumb) thumb.classList.remove('opacity-0', 'scale-[1.02]');
+                });
+            });
+
+            // --- 4. Form Action Processing Pipeline ---
+            const form = document.getElementById('native-enquiry-form');
+            const feedback = document.getElementById('form-feedback');
+            const submitBtn = document.getElementById('form-submit-btn');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Transmitting Brief...";
+
+                const formData = new FormData(form);
+                // Google Forms Endpoint Construction URL
+                const targetAction = 'https://docs.google.com/forms/d/e/1FAIpQLSfD_Gg_YourActualFormIdHere/formResponse';
+
+                try {
+                    await fetch(targetAction, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'no-cors'
+                    });
+                    
+                    feedback.className = "text-xs font-semibold tracking-wide text-center mt-4 text-emerald-400 block";
+                    feedback.innerText = "Brief successfully logged. I'll get back to you soon.";
+                    form.reset();
+                } catch (error) {
+                    feedback.className = "text-xs font-semibold tracking-wide text-center mt-4 text-rose-400 block";
+                    feedback.innerText = "Transmission interruption. Please email direct link directly.";
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `Submit Details <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>`;
+                }
             });
         });
     </script>
