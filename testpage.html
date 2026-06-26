@@ -359,10 +359,26 @@
                 slider.insertBefore(cloneBefore, slider.firstChild);
             });
 
-            // Set default initial midpoint position away from structural boundaries
-            const setWidth = sets[0].offsetWidth + 24; // Including track gap metric
-            slider.scrollLeft = setWidth * sets.length;
+            // Set up baseline measurements
+            const setWidth = sets[0].offsetWidth + 24; // Including the gap-6 track metric
+            const totalOriginalWidth = setWidth * sets.length;
 
+            // Set baseline centering position initial midpoint 
+            slider.scrollLeft = totalOriginalWidth;
+
+            // Global scrolling listener captures trackpads, wheels, touch-swipes, and mouse-drags flawlessly
+            slider.addEventListener('scroll', () => {
+                // If sliding too close to the left start edge clones, jump down instantly to matching real position
+                if (slider.scrollLeft <= 0) {
+                    slider.scrollLeft = totalOriginalWidth;
+                } 
+                // If sliding too far into the right end edge clones, seamlessly wrap back to center baseline
+                else if (slider.scrollLeft >= totalOriginalWidth * 2) {
+                    slider.scrollLeft = totalOriginalWidth;
+                }
+            });
+
+            // Click-to-Drag Pointer Handlers
             slider.addEventListener('mousedown', (e) => {
                 isDown = true;
                 slider.classList.add('active');
@@ -384,18 +400,6 @@
                 const x = e.pageX - slider.offsetLeft;
                 const walk = (x - startX) * 1.5;
                 slider.scrollLeft = scrollLeft - walk;
-                
-                // Real-time boundary structural adjustment loop checking
-                const totalWidth = setWidth * sets.length;
-                if (slider.scrollLeft < totalWidth / 2) {
-                    slider.scrollLeft += totalWidth;
-                    scrollLeft = slider.scrollLeft;
-                    startX = x;
-                } else if (slider.scrollLeft > totalWidth * 2) {
-                    slider.scrollLeft -= totalWidth;
-                    scrollLeft = slider.scrollLeft;
-                    startX = x;
-                }
             });
         }
 
